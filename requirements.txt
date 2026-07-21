@@ -1,0 +1,30 @@
+# Bay of Bengal Marine Heatwave Project — Python dependencies
+# Python version: 3.10.12 (tested)
+# Install:  pip install -r requirements.txt
+# See README.md ("Environment Setup") for full instructions.
+
+# --- Core numerics & data handling ---
+numpy==2.2.6
+pandas==2.3.3
+scipy==1.15.3
+
+# --- NetCDF / gridded data ---
+xarray==2025.6.1
+netCDF4==1.7.4
+h5netcdf==1.8.1
+cftime==1.6.5
+
+# --- Plotting & mapping ---
+matplotlib==3.10.9
+Cartopy==0.25.0
+shapely==2.1.2
+
+# --- Machine learning (machine_learning/ module) ---
+scikit-learn==1.7.2
+xgboost==3.2.0
+shap==0.49.1
+joblib==1.5.3
+
+# --- Utilities ---
+PyYAML==6.0.3
+tqdm==4.68.4
