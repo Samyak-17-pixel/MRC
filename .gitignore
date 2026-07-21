@@ -1,0 +1,40 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Raw input datasets (large NetCDF files — see datasets/README.md for download instructions)
+datasets/*.nc
+datasets/heat_flux_data_2006_2025/
+datasets/Wind_speed_data_2006_2025/
+
+# Large derived NetCDF files
+results/**/*.nc
+*.nc
+
+# Generated figures (thousands of files — regenerate with scripts, see documentation/)
+results/**/*.png
+results/**/*.pdf
+mhw_ml/outputs/**/*.png
+mhw_ml/outputs/**/*.pdf
+machine_learning/outputs/**/*.png
+machine_learning/outputs/**/*.pdf
+
+# Trained model binaries (regenerate with training scripts)
+mhw_ml/models/**/*.joblib
+mhw_ml/models/**/*.pkl
+mhw_ml/models/**/*.ubj
+machine_learning/models/**/*.joblib
+machine_learning/models/**/*.pkl
+machine_learning/models/**/*.ubj
+
+# Cartopy cache
+cartopy_data/
+
+# Keep the small base map at repository root
+!bay_of_bengal_base_map.png
+
+# OS / editor
+.DS_Store
+*.swp

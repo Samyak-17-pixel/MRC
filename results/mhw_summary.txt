@@ -1,0 +1,15 @@
+
+NORTH
+Total Events: 49
+Longest Event: 61 days
+Strongest Event: 0.912 C
+
+CENTRAL
+Total Events: 40
+Longest Event: 53 days
+Strongest Event: 0.908 C
+
+SOUTH
+Total Events: 28
+Longest Event: 81 days
+Strongest Event: 0.943 C

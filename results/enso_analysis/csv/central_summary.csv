@@ -1,0 +1,4 @@
+Phase,Events,Percentage,Mean Duration,Longest Duration,Mean Intensity,Maximum Intensity,Mean ONI
+El Nino,10,25.0,17.5,44,0.142,0.908,1.554
+Neutral,20,50.0,15.15,53,0.162,0.545,-0.147
+La Nina,10,25.0,10.3,24,0.159,0.842,-0.885

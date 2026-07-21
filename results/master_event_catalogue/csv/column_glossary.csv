@@ -1,0 +1,58 @@
+Column,Description
+Region,Bay of Bengal sub-region
+Event_ID,"Unique event identifier (N01, C01, S01...)"
+Year,Year of event start
+Season,Meteorological season at event start
+Start_Date,Event start/end dates
+End_Date,Event start/end dates
+Duration_Days,Event length in days
+Mean_SST_C,Mean/Max/Min SST during event (°C)
+Max_SST_C,Mean/Max/Min SST during event (°C)
+Min_SST_C,Mean/Max/Min SST during event (°C)
+SST_Range_C,Mean/Max/Min SST during event (°C)
+Mean_Threshold_C,Hobday 90th percentile threshold (°C)
+Mean_SST_Above_Threshold_C,Mean/Max/Min SST during event (°C)
+Mean_Intensity_C,MHW intensity above threshold (°C)
+Max_Intensity_C,MHW intensity above threshold (°C)
+ONI_0m,Oceanic Niño Index at lag (months)
+ONI_1m,Oceanic Niño Index at lag (months)
+ONI_2m,Oceanic Niño Index at lag (months)
+ONI_3m,Oceanic Niño Index at lag (months)
+ONI_6m,Oceanic Niño Index at lag (months)
+ENSO_Phase,ENSO phase at event month
+DMI_0m,Dipole Mode Index at lag (months)
+DMI_1m,Dipole Mode Index at lag (months)
+DMI_2m,Dipole Mode Index at lag (months)
+DMI_3m,Dipole Mode Index at lag (months)
+DMI_6m,Dipole Mode Index at lag (months)
+IOD_Phase,IOD phase at event/lag month
+IOD_Phase_1m,IOD phase at event/lag month
+IOD_Phase_6m,IOD phase at event/lag month
+MEI_0m,MEI v2 at lag (months)
+MEI_1m,MEI v2 at lag (months)
+MEI_2m,MEI v2 at lag (months)
+MEI_3m,MEI v2 at lag (months)
+MEI_6m,MEI v2 at lag (months)
+MEI_Phase,MEI phase at event/lag month
+MEI_Phase_6m,MEI phase at event/lag month
+Wind_30d_Before_ms,Wind speed (m/s) before/during event
+Wind_21d_Before_ms,Wind speed (m/s) before/during event
+Wind_14d_Before_ms,Wind speed (m/s) before/during event
+Wind_7d_Before_ms,Wind speed (m/s) before/during event
+Wind_During_ms,Wind speed (m/s) before/during event
+Wind_Change_30d_ms,Wind speed (m/s) before/during event
+Wind_Change_21d_ms,Wind speed (m/s) before/during event
+Wind_Change_14d_ms,Wind speed (m/s) before/during event
+Wind_Change_7d_ms,Wind speed (m/s) before/during event
+Wind_Climatology_ms,Wind speed (m/s) before/during event
+Wind_Anomaly_ms,Wind speed (m/s) before/during event
+Wind_Classification,Wind vs climatology classification
+Weak_Wind_Event,True if wind below climatology during event
+SLHF_Climatology_Wm2,Surface latent/sensible heat flux (W/m²)
+SLHF_During_Wm2,Surface latent/sensible heat flux (W/m²)
+SLHF_Anomaly_Wm2,Surface latent/sensible heat flux (W/m²)
+SSHF_Climatology_Wm2,Surface latent/sensible heat flux (W/m²)
+SSHF_During_Wm2,Surface latent/sensible heat flux (W/m²)
+SSHF_Anomaly_Wm2,Surface latent/sensible heat flux (W/m²)
+Reduced_Latent_Heat_Loss,True if reduced heat loss during event (positive anomaly)
+Reduced_Sensible_Heat_Loss,True if reduced heat loss during event (positive anomaly)

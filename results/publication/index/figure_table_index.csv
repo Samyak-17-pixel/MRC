@@ -1,0 +1,10 @@
+kind,code,title,path_png,path_pdf
+TABLE,T01,Regional master summary,/home/samyak/mrc_ws/results/publication/tables/T01_regional_master_summary.png,/home/samyak/mrc_ws/results/publication/tables/T01_regional_master_summary.pdf
+TABLE,T02,Climate driver rankings,/home/samyak/mrc_ws/results/publication/tables/T02_driver_rankings.png,/home/samyak/mrc_ws/results/publication/tables/T02_driver_rankings.pdf
+TABLE,T03,ML best models (test),/home/samyak/mrc_ws/results/publication/tables/T03_ml_best_models.png,/home/samyak/mrc_ws/results/publication/tables/T03_ml_best_models.pdf
+FIGURE,F01,Total MHW events by region,/home/samyak/mrc_ws/results/publication/figures/F01_events_by_region.png,/home/samyak/mrc_ws/results/publication/figures/F01_events_by_region.pdf
+FIGURE,F02,Weak-wind percent by region,/home/samyak/mrc_ws/results/publication/figures/F02_weak_wind_percent.png,/home/samyak/mrc_ws/results/publication/figures/F02_weak_wind_percent.pdf
+FIGURE,F03,Driver composite score heatmap,/home/samyak/mrc_ws/results/publication/figures/F03_driver_composite_heatmap.png,/home/samyak/mrc_ws/results/publication/figures/F03_driver_composite_heatmap.pdf
+FIGURE,F04,Annual event count timelines,/home/samyak/mrc_ws/results/publication/figures/F04_annual_event_counts.png,/home/samyak/mrc_ws/results/publication/figures/F04_annual_event_counts.pdf
+FIGURE,F05,ML best-model F1 heatmap,/home/samyak/mrc_ws/results/publication/figures/F05_ml_best_f1_heatmap.png,/home/samyak/mrc_ws/results/publication/figures/F05_ml_best_f1_heatmap.pdf
+DASHBOARD,D01,Master summary dashboard,/home/samyak/mrc_ws/results/publication/dashboards/D01_master_summary_dashboard.png,/home/samyak/mrc_ws/results/publication/dashboards/D01_master_summary_dashboard.pdf

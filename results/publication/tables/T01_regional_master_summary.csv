@@ -1,0 +1,4 @@
+Region,Events,Mean_Duration,Mean_Max_Intensity,Mean_Max_SST,Pct_Weak_Wind,Pct_El_Nino_ENSO,Pct_Positive_IOD,Pct_Reduced_SLHF
+North,49,13.04,0.32,29.56,83.67,26.53,26.53,34.69
+Central,40,14.52,0.3,29.95,77.5,25.0,25.0,55.0
+South,28,20.54,0.31,30.14,82.14,53.57,35.71,57.14

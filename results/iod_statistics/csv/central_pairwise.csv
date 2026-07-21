@@ -1,0 +1,4 @@
+Comparison,Duration_U,Duration_p,Intensity_U,Intensity_p
+Positive vs Neutral,192.5,0.05048148416264232,123.0,0.6941040465912246
+Positive vs Negative,8.0,0.42814361875928675,9.0,0.36363636363636365
+Neutral vs Negative,15.5,0.852001436348665,21.0,0.4999999999999999
