@@ -1,0 +1,10 @@
+Region,Forecast_Date,Horizon_Days,P_MHW_Onset,Alert_Level,Current_SST_C,Current_Intensity_C,Current_Wind_ms,In_MHW_Now,Model
+North,2025-12-31,3,0.0,LOW,26.006,-1.159,2.773,0,onset_3d_xgboost
+North,2025-12-31,7,0.0005,LOW,26.006,-1.159,2.773,0,onset_7d_xgboost
+North,2025-12-31,14,0.0008,LOW,26.006,-1.159,2.773,0,onset_14d_xgboost
+Central,2025-12-31,3,0.0,LOW,28.083,-0.591,4.288,0,onset_3d_xgboost
+Central,2025-12-31,7,0.0001,LOW,28.083,-0.591,4.288,0,onset_7d_xgboost
+Central,2025-12-31,14,0.0029,LOW,28.083,-0.591,4.288,0,onset_14d_xgboost
+South,2025-12-31,3,0.0012,LOW,28.938,-0.104,3.644,0,onset_3d_xgboost
+South,2025-12-31,7,0.0004,LOW,28.938,-0.104,3.644,0,onset_7d_xgboost
+South,2025-12-31,14,0.0014,LOW,28.938,-0.104,3.644,0,onset_14d_xgboost

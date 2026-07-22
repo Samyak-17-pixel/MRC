@@ -3,9 +3,11 @@
 **Project:** Bay of Bengal Marine Heatwave Onset Forecasting  
 **Author:** Samyak Kumar  
 **Institution:** Maritime Research Center (MRC)  
-**Module location:** `/home/samyak/mrc_ws/mhw_ml/`  
-**Last updated:** 2026-07-13
+**Module location (canonical):** `machine_learning/`  
+**Legacy wrappers:** `mhw_ml/` (forwards to `machine_learning/`)  
+**Last updated:** 2026-07-22 (paths updated for reorganization)
 
+> Prefer [`../documentation/12_machine_learning.md`](../documentation/12_machine_learning.md) and [`../machine_learning/README.md`](../machine_learning/README.md).  
 > This document describes **everything** the ML module does — data, labels, features, models, validation, outputs, and how to run it. It is self-contained and separate from `PROJECT.md`.
 
 ---

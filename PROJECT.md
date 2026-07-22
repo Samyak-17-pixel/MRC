@@ -369,7 +369,7 @@ top_event_sst_maps/
 │   ├── climate_comparison/       ← ENSO vs IOD vs MEI comparison (59 figures)
 │   ├── master_event_catalogue/   ← Per-event master tables + figures (117 events)
 │   ├── top_event_sst_maps/       ← Top-10 SST lifecycle maps (strongest + longest)
-│   (ML module: mhw_ml/ — see mhw_ml/ML_EXECUTION.md)
+│   (ML module: machine_learning/ — see documentation/12_machine_learning.md; legacy mhw_ml/ wrappers)
 │   ├── wind_analysis/          ← Wind–MHW analysis (117 event plots)
 │   ├── heat_flux/              ← Heat flux timeseries
 │   ├── heat_flux_analysis/     ← Heat flux during MHWs
@@ -547,13 +547,13 @@ Investigate combined influence of multiple drivers.
 
 ### Phase 12: Machine Learning Forecasting ✅ (COMPLETED 2026-07-13)
 
-MHW onset prediction module in separate folder `mhw_ml/`.
+MHW onset prediction module in separate folder `machine_learning/` (legacy wrappers in `mhw_ml/`).
 
 | Deliverable | Script | Output |
 |-------------|--------|--------|
-| Full ML pipeline + documentation | `mhw_ml/scripts/run_pipeline.py` | `mhw_ml/` |
+| Full ML pipeline + documentation | `machine_learning/run_pipeline.py` | `machine_learning/` |
 
-**Documentation:** `mhw_ml/ML_EXECUTION.md` (detailed guide)
+**Documentation:** `documentation/12_machine_learning.md` · `machine_learning/README.md` · `machine_learning/ML_EXECUTION.md`
 
 **Task:** Predict new MHW onset within 3/7/14 days per region  
 **Models:** XGBoost, Random Forest, Gradient Boosting + baselines  
@@ -566,8 +566,9 @@ MHW onset prediction module in separate folder `mhw_ml/`.
 - `mhw_ml/outputs/shap/` feature importance plots
 
 ```bash
-cd /home/samyak/mrc_ws
-.venv/bin/python mhw_ml/scripts/run_pipeline.py
+cd <repo-root>
+.venv/bin/python machine_learning/run_pipeline.py
+# legacy: .venv/bin/python mhw_ml/scripts/run_pipeline.py
 ```
 
 ---
@@ -613,7 +614,7 @@ All climate-driver analyses use identical methods for direct comparability:
 |-------|--------|------------|
 | DMI ends April 2025 | 8 events with Unknown IOD phase | Extend DMI or use nearest-month fallback |
 | Regional bounding boxes differ | SST (85–95°E) vs wind (80–100°E) | Standardize in future scripts |
-| No README / requirements.txt | Reproducibility gap | Create when pipeline stabilizes |
+| No README / requirements.txt | Reproducibility gap | ✅ Addressed on `docs-and-ml-reorg` (READMEs + requirements.txt) |
 | ENSO spatial analysis incomplete | No composite maps | Defer to Phase 13 |
 | South has 0 Negative IOD events | Some tests skipped (NaN) | Expected — document in results |
 
