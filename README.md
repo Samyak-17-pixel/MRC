@@ -477,21 +477,6 @@ top_event_sst_maps/
 ├── strongest/{north,central,south}/rank##_EVENT_DATE/
 ├── longest/{north,central,south}/rank##_EVENT_DATE/
 └── mosaics/{strongest,longest}/  # regional during-composite mosaics
-```
-
-#### Phase 11: Incomplete / Deferred Work
-
-| Item | Status | Notes |
-|------|--------|-------|
-| ENSO spatial composites | ⏸ Deferred | `enso_spatial_analysis.py` — started, no figure outputs |
-| ENSO final pipeline | ⏸ Scaffold | `enso_final_pipeline.py` — 11 modules pending |
-| Publication ENSO figures | ⏸ Not run | `enso_figures.py` — class defined, no runner |
-| Per-event SST plots (ENSO) | ⏸ Empty dirs | `enso_analysis/*_event_plots/` — 0 files |
-| Comparative driver assessment | ✅ Complete | `outputs/climate_comparison/` |
-| Master per-event catalogue | ✅ Complete | `outputs/master_event_catalogue/` |
-| Physical mechanism integration | 🔶 Partial | Wind + heat flux done; others pending |
-| Multivariate analysis | ❌ Not started | Correlation matrices, PCA, regression |
-| Machine learning forecasting | ✅ Complete | `src/ml/` — see Part C / `src/ml/README.md` |
 
 ---
 
@@ -646,79 +631,7 @@ cat results_text
 
 ---
 
-### 9. Planned Next Steps
-
-#### Phase 9: Master MHW Event Catalogue
-
-**Deliverables:** ✅ DONE — see Phase 9 above.
-
-```bash
-cd /path/to/MRC
-.venv/bin/python src/climate/scripts/build_master_event_catalogue.py
-```
-
----
-
-#### Phase 10: Top-Event SST Lifecycle Maps
-
-```bash
-cd /path/to/MRC
-.venv/bin/python src/climate/scripts/top_event_sst_lifecycle_maps.py
-```
-
----
-
-#### Phase 11: Physical Mechanism Analysis (Expand) — NEXT
-
-Wind and heat flux are partially done. Expand to full event-based framework.
-
-**Variables to integrate (Copernicus):**
-
-| Variable | Status | Script |
-|----------|--------|--------|
-| Surface wind speed | ✅ Done | `wind_mhw_analysis.py` |
-| Latent heat flux (SLHF) | ✅ Done | `heat_flux_mhw_analysis.py` |
-| Sensible heat flux (SSHF) | ✅ Done | `heat_flux_mhw_analysis.py` |
-| Shortwave / longwave radiation | ❌ Pending | TBD |
-| Net surface heat flux | ❌ Pending | TBD |
-| Precipitation / evaporation | ❌ Pending | TBD |
-| Sea level pressure | ❌ Pending | TBD |
-| Mixed layer depth | ❌ Pending | TBD |
-| Ocean currents | ❌ Pending | TBD |
-| Sea surface salinity | ❌ Pending | TBD |
-| BSISO index | ❌ Pending | TBD |
-
-**Analyses per variable:**
-- Event-based composite (before / during / after MHW)
-- Lead–lag correlation with MHW duration and intensity
-- Anomaly maps surrounding MHW initiation
-- Mann–Kendall trend analysis
-
-**Script pattern:** Same as climate indices — link each MHW event to variable values at multiple lead times.
-
----
-
-#### Phase 11: Multivariate Statistical Analysis
-
-Investigate combined influence of multiple drivers.
-
-**Methods:**
-- Correlation matrices (all indices + environmental variables)
-- Partial correlation analysis
-- Multiple linear regression
-- Generalized additive models (GAM)
-- Principal Component Analysis (PCA)
-- Empirical Orthogonal Functions (EOF)
-- Variance Inflation Factor (VIF) for multicollinearity
-- Feature importance ranking
-
-**Script:** `multivariate_analysis.py` → `outputs/multivariate/`
-
-**Goal:** Determine whether MHWs are controlled by a single climate mode or arise through combined influence of multiple oscillations and local processes.
-
----
-
-#### Phase 12: Machine Learning Forecasting ✅ (COMPLETED 2026-07-13)
+#### Phase 11: Machine Learning Forecasting ✅ (COMPLETED 2026-07-13)
 
 MHW onset prediction lives in `src/ml/` (separate from the climate pipeline).
 
@@ -743,23 +656,6 @@ cd /path/to/MRC
 .venv/bin/python src/ml/run_pipeline.py
 .venv/bin/python src/ml/experiments/06_predict_current.py
 ```
-
----
-
-#### Phase 13: Publication & Reporting
-
-- Integrate all analyses into final research report / journal manuscript
-- Publication-quality figure dashboard (600 dpi PNG + PDF)
-- Reproducible pipeline documentation
-- Methodology diagrams
-- Statistical comparison tables (ENSO vs IOD vs MEI vs Wind vs ML)
-
-**Deferred items to revisit:**
-- ENSO spatial composite analysis (`enso_spatial_analysis.py`)
-- Publication ENSO figures (`enso_figures.py`)
-- ENSO final pipeline (`enso_final_pipeline.py`)
-- Per-event SST diagnostic plots
-
 ---
 
 ### 10. Statistical Methods Reference
@@ -779,41 +675,10 @@ All climate-driver analyses use identical methods for direct comparability:
 
 **Figure standards:** 600 dpi PNG + PDF, consistent fonts/colors/legends across all analyses.
 
----
-
-### 11. Known Issues
-
-| Issue | Impact | Resolution |
-|-------|--------|------------|
-| DMI ends April 2025 | 8 events with Unknown IOD phase | Extend DMI or use nearest-month fallback |
-| Regional bounding boxes differ | SST (85–95°E) vs wind (80–100°E) | Standardize in future scripts |
-| No README / requirements.txt | Reproducibility gap | ✅ Addressed on `docs-and-ml-reorg` (READMEs + requirements.txt) |
-| ENSO spatial analysis incomplete | No composite maps | Defer to Phase 13 |
-| South has 0 Negative IOD events | Some tests skipped (NaN) | Expected — document in results |
 
 ---
 
-### 12. Progress Tracker
-
-| Phase | Description | Status |
-|-------|-------------|--------|
-| 1 | Data preparation | ✅ Complete |
-| 2 | MHW detection & reporting | ✅ Complete |
-| 3 | Climate index characterization | ✅ Complete |
-| 4 | ENSO–MHW analysis | ✅ Complete |
-| 5 | Wind & heat flux drivers | ✅ Complete |
-| 6 | IOD–MHW analysis | ✅ Complete |
-| 7 | MEI v2–MHW analysis | ✅ Complete |
-| 8 | Comparative driver assessment | ✅ Complete |
-| 9 | Incomplete / deferred items | ⏸ Partial |
-| **10** | **Physical mechanism expansion** | **❌ Next** |
-| 11 | Multivariate analysis | ❌ Planned |
-| 12 | Machine learning forecasting | ✅ Complete |
-| 13 | Publication & reporting | ❌ Planned |
-
----
-
-### 13. Dependencies
+### 11. Dependencies
 
 Python 3.10.12 (`.venv/`). Inferred packages:
 
@@ -1332,27 +1197,7 @@ Output: `src/ml/outputs/forecasts/year_verification_2025.csv`
 
 ---
 
-### 15. Project Phases Completed
-
-| Phase | Description | Status | Key Output |
-|-------|-------------|--------|------------|
-| 1 | Data preparation & SST extraction | ✅ | `outputs/*_bob_sst.csv` |
-| 2 | Hobday climatology & MHW detection | ✅ | 117 events detected |
-| 3 | ENSO (ONI) analysis | ✅ | `outputs/enso_*/` |
-| 4 | Wind driver analysis | ✅ | 78–84% weak wind finding |
-| 5 | Heat flux analysis | ✅ | `outputs/drivers/heat_flux_analysis/` |
-| 6 | IOD (DMI) analysis | ✅ | `outputs/iod_*/` |
-| 7 | MEI v2 analysis | ✅ | `outputs/mei_*/` |
-| 8 | Climate driver comparison | ✅ | IOD ranked #1 all regions |
-| 9 | Master event catalogue | ✅ | 117 events × 57 parameters |
-| 10 | Top-event SST lifecycle maps | ✅ | 3,329 maps, 60 events |
-| 11 | Multivariate analysis | ❌ Pending | — |
-| 12 | ML forecasting | ✅ | `src/ml/` (best-model forecast + 2025 verification) |
-| 13 | Publication & reporting | ❌ Pending | — |
-
----
-
-### 16. Output Inventory
+### 15. Output Inventory
 
 | Category | Location | Count |
 |----------|----------|-------|
@@ -1369,7 +1214,7 @@ Output: `src/ml/outputs/forecasts/year_verification_2025.csv`
 
 ---
 
-### 17. Known Data Limitations
+### 16. Known Data Limitations
 
 | Issue | Impact |
 |-------|--------|
@@ -1383,7 +1228,7 @@ Output: `src/ml/outputs/forecasts/year_verification_2025.csv`
 
 ---
 
-### 18. Key Conclusions
+### 17. Key Conclusions
 
 1. **117 MHW events** detected across North (49), Central (40), and South (28) BoB, 2006–2025.
 2. **Wind is the dominant local driver** — 81% of events occur under weak wind conditions.
