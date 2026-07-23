@@ -1,40 +1,135 @@
-# Python
+# =============================================================================
+# Bay of Bengal MHW — .gitignore
+# Target: https://github.com/Samyak-17-pixel/MRC.git
+#
+# TRACKED (by design): Python/YAML/Markdown, requirements, CSV products,
+#                      folder READMEs, small text summaries
+# IGNORED (by design): raw NetCDF, derived NetCDF, figures, model binaries,
+#                      virtualenvs, caches, IDE/OS junk
+# =============================================================================
+
+# ----- Python -----
 .venv/
+venv/
+env/
+ENV/
 __pycache__/
-*.pyc
-*.pyo
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+.eggs/
+dist/
+build/
+pip-wheel-metadata/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+*.joblib
+*.pkl
+*.pickle
+*.ubj
 
-# Raw input datasets (large NetCDF files — see datasets/README.md for download instructions)
-datasets/*.nc
-datasets/heat_flux_data_2006_2025/
-datasets/Wind_speed_data_2006_2025/
+# ----- Secrets / local env (never commit) -----
+.env
+.env.*
+!.env.example
+*.pem
+credentials.json
+secrets.json
 
-# Large derived NetCDF files
-results/**/*.nc
-*.nc
-
-# Generated figures (thousands of files — regenerate with scripts, see documentation/)
-results/**/*.png
-results/**/*.pdf
-mhw_ml/outputs/**/*.png
-mhw_ml/outputs/**/*.pdf
-machine_learning/outputs/**/*.png
-machine_learning/outputs/**/*.pdf
-
-# Trained model binaries (regenerate with training scripts)
-mhw_ml/models/**/*.joblib
-mhw_ml/models/**/*.pkl
-mhw_ml/models/**/*.ubj
-machine_learning/models/**/*.joblib
-machine_learning/models/**/*.pkl
-machine_learning/models/**/*.ubj
-
-# Cartopy cache
-cartopy_data/
-
-# Keep the small base map at repository root
-!bay_of_bengal_base_map.png
-
-# OS / editor
+# ----- OS / editor -----
 .DS_Store
+Thumbs.db
 *.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.code-workspace
+
+# ----- Notebooks / Jupyter checkpoints -----
+.ipynb_checkpoints/
+
+# ----- Cartopy / matplotlib caches -----
+cartopy_data/
+.cache/
+matplotlib/
+
+# ----- Logs -----
+*.log
+src/ml/logs/
+outputs/**/logs/
+outputs/**/*.log
+
+# =============================================================================
+# DATA — raw inputs (place locally; see data/raw/README.md)
+# =============================================================================
+# All NetCDF (raw + derived). Small index NetCDFs (oni/dmi/mei) are also ignored;
+# re-download from source or keep a local copy outside Git.
+*.nc
+*.nc4
+*.hdf
+*.hdf5
+*.grib
+*.grib2
+
+# Raw bulk folders (even if non-.nc files appear inside)
+data/raw/heat_flux_data_2006_2025/
+data/raw/Wind_speed_data_2006_2025/
+data/raw/**/*.zip
+data/raw/**/*.tar
+data/raw/**/*.tar.gz
+data/raw/**/*.tgz
+
+# Keep data READMEs
+!data/**/README.md
+
+# =============================================================================
+# OUTPUTS — heavy / regenerable artifacts
+# =============================================================================
+# Figures (thousands of PNG/PDF — regenerate via src/climate/scripts/)
+*.png
+*.jpg
+*.jpeg
+*.tif
+*.tiff
+*.svg
+*.pdf
+*.eps
+
+# Keep any intentional small brand asset exceptions here if needed later:
+# !path/to/keep.png
+
+# Spatially/temporal large intermediates that are not .nc
+outputs/**/*.npy
+outputs/**/*.npz
+outputs/**/*.h5
+outputs/**/*.zarr/
+
+# =============================================================================
+# ML — trained weights (regenerate with src/ml/training/)
+# =============================================================================
+src/ml/models/**/*.joblib
+src/ml/models/**/*.pkl
+src/ml/models/**/*.ubj
+src/ml/models/**/*.json
+# Keep metrics/forecast CSVs under src/ml/outputs/ (not ignored)
+
+# =============================================================================
+# Optional local scratch
+# =============================================================================
+tmp/
+temp/
+scratch/
+*.tmp
+*.bak
+*~
+archive/**/__pycache__/
