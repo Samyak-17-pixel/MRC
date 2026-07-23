@@ -18,7 +18,6 @@ REGIONS = {
     "south": dict(lat=slice(8,0), lon=slice(80,95))
 }
 
-
 def load_flux(variable):
 
     all_years = []
@@ -38,13 +37,11 @@ def load_flux(variable):
 
     return xr.concat(all_years, dim="valid_time")
 
-
 print("Loading latent heat flux...")
 slhf_ds = load_flux("slhf")
 
 print("Loading sensible heat flux...")
 sshf_ds = load_flux("sshf")
-
 
 for region, box in REGIONS.items():
 

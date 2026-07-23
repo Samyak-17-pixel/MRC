@@ -5,12 +5,10 @@ from pathlib import Path
 import glob
 import re
 
-
 DATA_DIR = "/home/samyak/mrc_ws/data/raw"
 RESULTS_DIR = "/home/samyak/mrc_ws/outputs"
 
 Path(RESULTS_DIR).mkdir(exist_ok=True)
-
 
 files = sorted(
     glob.glob(f"{DATA_DIR}/sst.day.mean.20*.nc")
@@ -20,9 +18,7 @@ print("\nFiles Found:")
 for f in files:
     print(f)
 
-
 master_summary = []
-
 
 for file_path in files:
 
@@ -33,15 +29,12 @@ for file_path in files:
     output_dir = Path(f"{RESULTS_DIR}/yearly/{year}")
     output_dir.mkdir(parents=True, exist_ok=True)
 
-
     ds = xr.open_dataset(file_path)
-
 
     bob = ds.sel(
         lat=slice(0,30),
         lon=slice(75,100)
     )
-
 
     plt.figure(figsize=(10,6))
 
@@ -57,7 +50,6 @@ for file_path in files:
     )
 
     plt.close()
-
 
     north = bob.sel(
         lat=slice(15,22),
@@ -77,7 +69,6 @@ for file_path in files:
     north_sst = north.sst.mean(dim=["lat","lon"])
     central_sst = central.sst.mean(dim=["lat","lon"])
     south_sst = south.sst.mean(dim=["lat","lon"])
-
 
     plt.figure(figsize=(14,6))
 
@@ -101,7 +92,6 @@ for file_path in files:
     )
 
     plt.close()
-
 
     stats = pd.DataFrame({
         "Region": ["North", "Central", "South"],
@@ -130,7 +120,6 @@ for file_path in files:
         index=False
     )
 
-
     master_summary.append({
 
         "Year": year,
@@ -146,7 +135,6 @@ for file_path in files:
     })
 
     print(f"Finished {year}")
-
 
 master_df = pd.DataFrame(master_summary)
 

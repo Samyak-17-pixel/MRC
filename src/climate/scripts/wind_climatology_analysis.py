@@ -24,7 +24,6 @@ for region in regions:
         wind["DOY"] != 366
     ]
 
-
     clim = wind.groupby(
         "DOY"
     )["WindSpeed"].mean()

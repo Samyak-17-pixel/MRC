@@ -34,11 +34,9 @@ DIRS = {
     "index": OUT / "index",
 }
 
-
 def ensure_dirs():
     for p in DIRS.values():
         p.mkdir(parents=True, exist_ok=True)
-
 
 def save_fig(path_stem: Path):
     path_stem.parent.mkdir(parents=True, exist_ok=True)
@@ -46,12 +44,10 @@ def save_fig(path_stem: Path):
     plt.savefig(f"{path_stem}.pdf", bbox_inches="tight")
     plt.close()
 
-
 def load_csv(path: Path) -> pd.DataFrame:
     if not path.exists():
         raise FileNotFoundError(str(path))
     return pd.read_csv(path)
-
 
 def render_table_png_pdf(df: pd.DataFrame, title: str, out_stem: Path, fontsize: int = 10):
     fig_w = max(10, 0.9 * df.shape[1])
@@ -70,7 +66,6 @@ def render_table_png_pdf(df: pd.DataFrame, title: str, out_stem: Path, fontsize:
     ax.set_title(title, fontweight="bold", pad=12)
     save_fig(out_stem)
 
-
 def fig_events_by_region(master_summary: pd.DataFrame):
     df = master_summary.copy()
     df["Region"] = df["Region"].astype(str)
@@ -84,7 +79,6 @@ def fig_events_by_region(master_summary: pd.DataFrame):
     ax.grid(axis="y", alpha=0.3)
     save_fig(DIRS["figures"] / "F01_events_by_region")
 
-
 def fig_weak_wind_by_region(master_summary: pd.DataFrame):
     df = master_summary.copy()
     fig, ax = plt.subplots(figsize=(9, 5))
@@ -96,7 +90,6 @@ def fig_weak_wind_by_region(master_summary: pd.DataFrame):
     ax.set_ylabel("% of events")
     ax.grid(axis="y", alpha=0.3)
     save_fig(DIRS["figures"] / "F02_weak_wind_percent")
-
 
 def fig_driver_ranking_heatmap(driver_rankings: pd.DataFrame):
     pivot = driver_rankings.pivot(index="Region", columns="Driver", values="CompositeScore")
@@ -115,7 +108,6 @@ def fig_driver_ranking_heatmap(driver_rankings: pd.DataFrame):
     cbar.set_label("Composite Score (higher = stronger influence)")
     ax.set_title("F03 — Climate Driver Composite Score Heatmap", fontweight="bold")
     save_fig(DIRS["figures"] / "F03_driver_composite_heatmap")
-
 
 def fig_annual_event_counts():
     files = {
@@ -137,7 +129,6 @@ def fig_annual_event_counts():
     plt.tight_layout()
     save_fig(DIRS["figures"] / "F04_annual_event_counts")
 
-
 def fig_ml_best_f1_heatmap():
     best = load_csv(BASE / "src/ml/outputs/metrics/best_models.csv")
     best["region"] = best["region"].astype(str).str.title()
@@ -157,7 +148,6 @@ def fig_ml_best_f1_heatmap():
     cbar.set_label("F1 (test 2022–2025)")
     ax.set_title("F05 — ML Best-Model F1 Heatmap (Onset Prediction)", fontweight="bold")
     save_fig(DIRS["figures"] / "F05_ml_best_f1_heatmap")
-
 
 def dashboard_one_page(master_summary: pd.DataFrame, driver_rankings: pd.DataFrame):
     fig = plt.figure(figsize=(16, 9))
@@ -207,7 +197,6 @@ def dashboard_one_page(master_summary: pd.DataFrame, driver_rankings: pd.DataFra
     fig.suptitle("D01 — Master Summary Dashboard (2006–2025)", fontweight="bold", fontsize=16, y=0.98)
     save_fig(DIRS["dashboards"] / "D01_master_summary_dashboard")
 
-
 @dataclass
 class IndexRow:
     kind: str
@@ -216,11 +205,9 @@ class IndexRow:
     path_png: str
     path_pdf: str
 
-
 def build_index(rows: list[IndexRow]):
     df = pd.DataFrame([r.__dict__ for r in rows])
     df.to_csv(DIRS["index"] / "figure_table_index.csv", index=False)
-
 
 def main():
     ensure_dirs()
@@ -279,7 +266,5 @@ def main():
     print(f"Index: {DIRS['index'] / 'figure_table_index.csv'}")
     print("=" * 80)
 
-
 if __name__ == "__main__":
     main()
-

@@ -35,7 +35,6 @@ plt.rcParams["figure.dpi"] = 300
 plt.rcParams["savefig.dpi"] = 600
 plt.rcParams["font.size"] = 13
 
-
 def classify_mei(mei):
     if pd.isna(mei):
         return "Unknown"
@@ -45,7 +44,6 @@ def classify_mei(mei):
         return "La Nina"
     return "Neutral"
 
-
 def load_mei():
     ds = xr.open_dataset(MEI_FILE)
     df = ds.to_dataframe().reset_index()
@@ -54,18 +52,15 @@ def load_mei():
     df = df[(df["time"].dt.year >= 2006) & (df["time"].dt.year <= 2025)]
     return df[["time", "MEI"]]
 
-
 def get_mei(dt, lag, mei_df):
     t = (pd.Timestamp(dt) - pd.DateOffset(months=lag)).replace(day=1)
     row = mei_df.loc[mei_df["time"] == t]
     return np.nan if len(row) == 0 else float(row["MEI"].iloc[0])
 
-
 def save_figure(path_stem):
     plt.savefig(f"{path_stem}.png", dpi=600, bbox_inches="tight")
     plt.savefig(f"{path_stem}.pdf", bbox_inches="tight")
     plt.close()
-
 
 mei = load_mei()
 summary = []

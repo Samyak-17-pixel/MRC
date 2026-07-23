@@ -1,41 +1,25 @@
-# MHW ML Forecasting Configuration
-# Maritime Research Center — Bay of Bengal Marine Heatwave Project
-#
-# Paths are resolved relative to the repository root by src/ml/common.py.
-# Absolute paths below are retained only for backward compatibility and are ignored
-# when results_relative is set.
-
 project:
   name: "BoB MHW Onset Forecasting"
   author: "Samyak Kumar"
   study_period: "2006-2025"
-
 paths:
   results_relative: "outputs"
-  # Legacy keys (optional): absolute paths from older configs
-  # workspace / results absolute values are no longer required
-
 task:
-  type: onset_warning          # predict new MHW start within horizon
-  min_consecutive_days: 5      # Hobday et al. 2016 definition
+  type: onset_warning
+  min_consecutive_days: 5
   horizons_days: [3, 7, 14]
-
 regions:
   - north
   - central
   - south
-
-model_scope: per_region        # train separate model per region
-
+model_scope: per_region
 splits:
   train_years: [2006, 2018]
   val_years: [2019, 2021]
   test_years: [2022, 2025]
-
 features:
   rolling_windows: [7, 14, 21, 30]
   climate_lag_months: [0, 1, 2, 3, 6]
-
 models:
   primary: xgboost
   compare:
@@ -52,7 +36,6 @@ models:
     n_estimators: 300
     max_depth: 8
     class_weight: balanced
-
 evaluation:
   metrics:
     - accuracy

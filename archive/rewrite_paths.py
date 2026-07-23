@@ -9,9 +9,8 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 
-# Ordered longest-first replacements (literal substrings in source files)
 LITERAL = [
-    # Absolute root
+
     ("/home/samyak/mrc_ws/outputs/mhw/catalogue", "/home/samyak/mrc_ws/outputs/mhw/catalogue"),
     ("/home/samyak/mrc_ws/outputs/mhw/climatology", "/home/samyak/mrc_ws/outputs/mhw/climatology"),
     ("/home/samyak/mrc_ws/outputs/mhw/annual_statistics", "/home/samyak/mrc_ws/outputs/mhw/annual_statistics"),
@@ -32,7 +31,6 @@ LITERAL = [
     ("/home/samyak/mrc_ws/outputs/maps", "/home/samyak/mrc_ws/outputs/maps"),
 ]
 
-# Stage folders enso/iod/mei
 for driver in ("enso", "iod", "mei"):
     for stage in ("lag", "frequency", "statistics", "annual", "seasonal", "strength", "analysis"):
         LITERAL.append(
@@ -42,7 +40,6 @@ for driver in ("enso", "iod", "mei"):
             )
         )
 
-# Timeseries files at results root
 for name in (
     "north_bob_sst.csv",
     "central_bob_sst.csv",
@@ -63,7 +60,6 @@ for name in (
         )
     )
 
-# Year folders
 for y in range(2016, 2027):
     LITERAL.append(
         (f"/home/samyak/mrc_ws/outputs/{y}", f"/home/samyak/mrc_ws/outputs/yearly/{y}")
@@ -78,7 +74,6 @@ LITERAL.extend(
     ]
 )
 
-# Relative path patterns (docs + code comments + relative Path usage)
 RELATIVE = [
     ("outputs/mhw/catalogue", "outputs/mhw/catalogue"),
     ("outputs/mhw/climatology", "outputs/mhw/climatology"),
@@ -108,11 +103,10 @@ RELATIVE.extend(
         ("src/ml/", "src/ml/"),
         ("src/climate/scripts/", "src/climate/src/climate/scripts/"),
         ("src/climate/plotting/", "src/climate/src/climate/plotting/"),
-        # bare outputs/ → outputs/ last among results* 
+
         ("outputs/", "outputs/"),
     ]
 )
-
 
 def rewrite_text(text: str) -> str:
     for old, new in LITERAL:
@@ -120,7 +114,6 @@ def rewrite_text(text: str) -> str:
     for old, new in RELATIVE:
         text = text.replace(old, new)
     return text
-
 
 def main():
     roots = [
@@ -154,7 +147,6 @@ def main():
             changed += 1
             print("updated", path.relative_to(REPO))
     print(f"Done. Files changed: {changed}")
-
 
 if __name__ == "__main__":
     main()

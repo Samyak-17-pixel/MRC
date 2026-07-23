@@ -44,13 +44,11 @@ REGION_BOXES = {
     "South": {"lat": (5, 10), "lon": (85, 95)},
 }
 
-
 def save_fig(path_stem: Path):
     path_stem.parent.mkdir(parents=True, exist_ok=True)
     plt.savefig(f"{path_stem}.png", dpi=600, bbox_inches="tight")
     plt.savefig(f"{path_stem}.pdf", bbox_inches="tight")
     plt.close()
-
 
 def create_map_ax(fig, subplot_spec=None):
     if subplot_spec is None:
@@ -62,11 +60,9 @@ def create_map_ax(fig, subplot_spec=None):
     ax.add_feature(cfeature.COASTLINE.with_scale("50m"), linewidth=0.6)
     return ax
 
-
 def draw_region_lines(ax):
     ax.plot([80, 100], [18, 18], transform=ccrs.PlateCarree(), color="red", linewidth=1.2)
     ax.plot([80, 100], [12, 12], transform=ccrs.PlateCarree(), color="red", linewidth=1.2)
-
 
 def draw_region_box(ax, region_name: str):
     box = REGION_BOXES.get(region_name)
@@ -78,10 +74,8 @@ def draw_region_box(ax, region_name: str):
     lats = [lat0, lat0, lat1, lat1, lat0]
     ax.plot(lons, lats, transform=ccrs.PlateCarree(), color="gold", linewidth=2.0, linestyle="--")
 
-
 def compute_doy_climatology(sst_all: xr.DataArray) -> xr.DataArray:
     return sst_all.groupby("time.dayofyear").mean("time")
-
 
 def five_day_mean(ds_sst: xr.DataArray, dates: list[pd.Timestamp]) -> xr.DataArray:
     times = [pd.Timestamp(d) for d in dates]
@@ -90,14 +84,11 @@ def five_day_mean(ds_sst: xr.DataArray, dates: list[pd.Timestamp]) -> xr.DataArr
         fields.append(ds_sst.sel(time=t, method="nearest"))
     return xr.concat(fields, dim="stack").mean("stack")
 
-
 def before_dates(start: pd.Timestamp) -> list[pd.Timestamp]:
     return [start - pd.Timedelta(days=i) for i in range(5, 0, -1)]
 
-
 def after_dates(end: pd.Timestamp) -> list[pd.Timestamp]:
     return [end + pd.Timedelta(days=i) for i in range(1, 6)]
-
 
 def during_dates_peak_centered(start: pd.Timestamp, end: pd.Timestamp, region: str) -> list[pd.Timestamp]:
     """
@@ -130,7 +121,6 @@ def during_dates_peak_centered(start: pd.Timestamp, end: pd.Timestamp, region: s
             break
     return days[:5] if days else [start]
 
-
 def plot_single(field: xr.DataArray, title: str, out_stem: Path, cmap: str, vmin, vmax, region: str, cbar_label: str):
     fig = plt.figure(figsize=(7.5, 7.5))
     ax = create_map_ax(fig)
@@ -146,7 +136,6 @@ def plot_single(field: xr.DataArray, title: str, out_stem: Path, cmap: str, vmin
     cb.set_label(cbar_label)
     ax.set_title(title, fontweight="bold", fontsize=10)
     save_fig(out_stem)
-
 
 def plot_triptych(before: xr.DataArray, during: xr.DataArray, after: xr.DataArray,
                   title: str, out_stem: Path, cmap: str, vmin, vmax, region: str, cbar_label: str):
@@ -181,7 +170,6 @@ def plot_triptych(before: xr.DataArray, during: xr.DataArray, after: xr.DataArra
     cbar.set_label(cbar_label)
     fig.subplots_adjust(left=0.06, right=0.98, top=0.88, bottom=0.06)
     save_fig(out_stem)
-
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
@@ -278,7 +266,5 @@ def main():
     print(f"Output: {OUT}")
     print("=" * 80)
 
-
 if __name__ == "__main__":
     main()
-

@@ -45,7 +45,6 @@ CATEGORIES = [
 
 plt.rcParams.update({"figure.dpi": 150, "savefig.dpi": 300, "font.size": 9})
 
-
 def save_fig(path_stem, fig=None, pdf=True):
     if fig is None:
         fig = plt.gcf()
@@ -54,7 +53,6 @@ def save_fig(path_stem, fig=None, pdf=True):
         fig.savefig(f"{path_stem}.pdf", bbox_inches="tight")
     plt.close(fig)
 
-
 def event_id_for(region, start_date):
     master = pd.read_csv(RESULTS / "master_event_catalogue" / "csv" / f"{region}_master_event_catalogue.csv")
     master["Start_Date"] = pd.to_datetime(master["Start_Date"]).dt.strftime("%Y-%m-%d")
@@ -62,7 +60,6 @@ def event_id_for(region, start_date):
     if not match.empty:
         return match.iloc[0]["Event_ID"]
     return "UNK"
-
 
 def load_event_list(region, category_key, fname_tpl):
     path = RESULTS / "mhw" / "top_events" / fname_tpl.format(region=region)
@@ -76,14 +73,11 @@ def load_event_list(region, category_key, fname_tpl):
     df["Rank"] = range(1, len(df) + 1)
     return df
 
-
 def before_dates(start, n=5):
     return [start - pd.Timedelta(days=i) for i in range(n, 0, -1)]
 
-
 def after_dates(end, n=5):
     return [end + pd.Timedelta(days=i) for i in range(1, n + 1)]
-
 
 def during_dates_strongest(start, end, region, regional_sst):
     """5 days centered on peak regional intensity during the event."""
@@ -108,7 +102,6 @@ def during_dates_strongest(start, end, region, regional_sst):
             break
     return days[:5]
 
-
 def during_dates_longest(start, end, n=5):
     """5 evenly spaced days across the event duration."""
     total = (end - start).days
@@ -116,7 +109,6 @@ def during_dates_longest(start, end, n=5):
         return pd.date_range(start, end, periods=min(n, total + 1)).tolist()
     offsets = np.linspace(0, total, n, dtype=int)
     return [start + pd.Timedelta(days=int(o)) for o in offsets]
-
 
 def create_event_map(figsize=(7, 8)):
     """BoB map using locally cached 50m coastline only (no downloads)."""
@@ -127,7 +119,6 @@ def create_event_map(figsize=(7, 8)):
     ax.set_facecolor("#e8f4fc")
     return fig, ax
 
-
 def draw_regions(ax):
     ax.plot([80, 100], [18, 18], transform=ccrs.PlateCarree(), color="red", linewidth=1.5)
     ax.plot([80, 100], [12, 12], transform=ccrs.PlateCarree(), color="red", linewidth=1.5)
@@ -135,10 +126,8 @@ def draw_regions(ax):
         ax.text(90, y, name, fontsize=10, weight="bold", ha="center",
                 transform=ccrs.PlateCarree())
 
-
 def folder_name(rank, event_id, start):
     return f"rank{rank:02d}_{event_id}_{start.strftime('%Y-%m-%d')}"
-
 
 def draw_region_box(ax, region):
     box = REGION_BOXES[region]
@@ -148,7 +137,6 @@ def draw_region_box(ax, region):
     lats = [lat0, lat0, lat1, lat1, lat0]
     ax.plot(lons, lats, transform=ccrs.PlateCarree(), color="gold",
             linewidth=2.5, linestyle="--", zorder=5)
-
 
 def get_sst_field(ds, date, doy_clim):
     """Return SST and anomaly fields for a single date."""
@@ -160,7 +148,6 @@ def get_sst_field(ds, date, doy_clim):
     clim = doy_clim.sel(dayofyear=doy, method="nearest")
     anomaly = field - clim
     return field, anomaly
-
 
 def plot_map(field, title, outfile, vmin, vmax, cmap="turbo", cbar_label="SST (°C)",
              region=None, anomaly=False, save_pdf=False):
@@ -179,15 +166,12 @@ def plot_map(field, title, outfile, vmin, vmax, cmap="turbo", cbar_label="SST (�
     ax.set_title(title, fontweight="bold", fontsize=10)
     save_fig(outfile, fig, pdf=save_pdf)
 
-
 def compute_vrange(fields):
     vals = [float(f.min()) for f in fields] + [float(f.max()) for f in fields]
     return min(vals), max(vals)
 
-
 def mean_field(fields):
     return xr.concat(fields, dim="stack").mean("stack")
-
 
 def plot_triptych(before, during, after, title, outfile, vmin, vmax, region):
     fig, axes = plt.subplots(1, 3, figsize=(18, 6),
@@ -207,7 +191,6 @@ def plot_triptych(before, during, after, title, outfile, vmin, vmax, region):
     fig.suptitle(title, fontweight="bold", fontsize=12)
     plt.tight_layout()
     save_fig(outfile, fig)
-
 
 def plot_grid(daily_info, title, outfile, vmin, vmax, region):
     """5 rows (before/during/after) x 5 cols daily maps — actually 3x5 layout."""
@@ -236,7 +219,6 @@ def plot_grid(daily_info, title, outfile, vmin, vmax, region):
     fig.subplots_adjust(top=0.92, bottom=0.05, left=0.04, right=0.92)
     save_fig(outfile, fig)
 
-
 def plot_difference(field_a, field_b, title, outfile, region, vmax=None):
     diff = field_b - field_a
     if vmax is None:
@@ -250,7 +232,6 @@ def plot_difference(field_a, field_b, title, outfile, region, vmax=None):
     plt.colorbar(pcm, ax=ax, shrink=0.75, label="ΔSST (°C)")
     ax.set_title(title, fontweight="bold")
     save_fig(outfile, fig)
-
 
 def plot_mosaic(event_composites, title, outfile, vmin, vmax, region):
     n = len(event_composites)
@@ -276,7 +257,6 @@ def plot_mosaic(event_composites, title, outfile, vmin, vmax, region):
     fig.suptitle(title, fontweight="bold", fontsize=12)
     plt.tight_layout()
     save_fig(outfile, fig)
-
 
 def process_event(ds, doy_clim, region, row, category, rank_metric_col, out_root):
     start = row["Start_Date"]
@@ -400,7 +380,6 @@ def process_event(ds, doy_clim, region, row, category, rank_metric_col, out_root
         "During_Dates": ", ".join(d.strftime("%Y-%m-%d") for d in days_during),
     }, comp_during
 
-
 def main():
     print("=" * 72)
     print("TOP-EVENT SST LIFECYCLE MAPS")
@@ -475,7 +454,6 @@ def main():
     print(f"  Output: {OUT}")
     print(f"  Index:  {OUT / 'index' / 'all_events_index.csv'}")
     print("=" * 72)
-
 
 if __name__ == "__main__":
     main()

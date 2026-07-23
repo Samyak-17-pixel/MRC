@@ -22,7 +22,6 @@ try:
 except ImportError:
     HAS_SHAP = False
 
-
 def plot_importance(importances, feature_names, title, outpath):
     idx = np.argsort(importances)[::-1][:20]
     fig, ax = plt.subplots(figsize=(8, 6))
@@ -35,7 +34,6 @@ def plot_importance(importances, feature_names, title, outpath):
     plt.savefig(outpath, dpi=200, bbox_inches="tight")
     plt.savefig(outpath.with_suffix(".pdf"), bbox_inches="tight")
     plt.close()
-
 
 def main():
     config = load_config()
@@ -123,7 +121,6 @@ def main():
     print("EXPLAINABILITY COMPLETE")
     print(f"  Output: {shap_dir}")
     print("=" * 72)
-
 
 if __name__ == "__main__":
     main()

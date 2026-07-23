@@ -38,12 +38,10 @@ plt.rcParams.update({
     "font.size": 10,
 })
 
-
 def save_fig(path_stem):
     plt.savefig(f"{path_stem}.png", dpi=600, bbox_inches="tight")
     plt.savefig(f"{path_stem}.pdf", bbox_inches="tight")
     plt.close()
-
 
 def season(month):
     if month in [12, 1, 2]:
@@ -54,13 +52,11 @@ def season(month):
         return "SW Monsoon"
     return "Post-Monsoon"
 
-
 def load_sst_stats(region):
     sst = pd.read_csv(RESULTS / "timeseries" / f"{region}_bob_sst.csv")
     sst["Date"] = pd.to_datetime(sst["Date"])
     hobday = pd.read_csv(RESULTS / f"mhw/climatology/{region}_hobday.csv")
     return sst, hobday
-
 
 def compute_event_sst(row, sst, hobday):
     start = pd.Timestamp(row["Start_Date"])
@@ -84,7 +80,6 @@ def compute_event_sst(row, sst, hobday):
         "Mean_Threshold_C": ev["Threshold90"].mean(),
         "Mean_SST_Above_Threshold_C": ev["Above_Threshold"].mean(),
     }
-
 
 def build_region_catalogue(region):
     label = REGION_LABELS[region]
@@ -185,7 +180,6 @@ def build_region_catalogue(region):
 
     return df.round(4)
 
-
 def plot_table_sections(df, region):
     label = REGION_LABELS[region]
     sections = [
@@ -243,7 +237,6 @@ def plot_table_sections(df, region):
         fname = sec_name.lower().replace(" ", "_").replace("&", "and")
         save_fig(FIG_DIR / "tables" / f"{region}_{fname}_table")
 
-
 def plot_full_summary_table(df, region):
     """Compact summary table with key columns only."""
     label = REGION_LABELS[region]
@@ -272,11 +265,9 @@ def plot_full_summary_table(df, region):
     ax.set_title(f"{label} — Master Event Summary Table", fontweight="bold", fontsize=13, pad=15)
     save_fig(FIG_DIR / "tables" / f"{region}_master_summary_table")
 
-
 def nice_label(col):
     """Convert column name to readable axis label."""
     return col.replace("_", " ")
-
 
 def zscore_normalize(data):
     """Column-wise z-score with safe handling for zero std and NaN."""
@@ -289,7 +280,6 @@ def zscore_normalize(data):
         else:
             normed[col] = (series - series.mean(skipna=True)) / std
     return normed
-
 
 def plot_parameter_heatmap(df, region):
     label = REGION_LABELS[region]
@@ -366,7 +356,6 @@ def plot_parameter_heatmap(df, region):
     plt.tight_layout()
     save_fig(FIG_DIR / "heatmaps" / f"{region}_phase_flag_heatmap")
 
-
 def plot_timeline(df, region):
     label = REGION_LABELS[region]
     fig, ax = plt.subplots(figsize=(16, max(5, 0.3 * len(df))))
@@ -418,7 +407,6 @@ def plot_timeline(df, region):
     plt.tight_layout()
     save_fig(FIG_DIR / "timelines" / f"{region}_wind_timeline")
 
-
 def plot_top_events(df, region, n=5):
     label = REGION_LABELS[region]
     for metric, title, fname in [
@@ -466,7 +454,6 @@ def plot_top_events(df, region, n=5):
         fig.suptitle(f"{label}: Top {n} {title} Events", fontweight="bold", fontsize=13)
         fig.tight_layout()
         save_fig(FIG_DIR / "top_events" / f"{region}_top{n}_{fname}")
-
 
 def plot_dashboard(df, region):
     label = REGION_LABELS[region]
@@ -547,7 +534,6 @@ def plot_dashboard(df, region):
                  fontweight="bold", fontsize=15)
     save_fig(FIG_DIR / "dashboards" / f"{region}_event_dashboard")
 
-
 def plot_combined_overview(all_df):
     fig, axes = plt.subplots(2, 2, figsize=(16, 12))
 
@@ -599,7 +585,6 @@ def plot_combined_overview(all_df):
             cell.set_text_props(color="white", fontweight="bold")
     ax.set_title("Regional Summary Statistics", fontweight="bold", fontsize=13, pad=15)
     save_fig(FIG_DIR / "tables" / "regional_summary_statistics_table")
-
 
 def main():
     print("=" * 80)
@@ -687,7 +672,6 @@ def main():
     print(f"  {CSV_DIR}/all_regions_master_event_catalogue.csv")
     print(f"  {CSV_DIR}/north_master_event_catalogue.csv")
     print(f"  {CSV_DIR}/column_glossary.csv")
-
 
 if __name__ == "__main__":
     main()

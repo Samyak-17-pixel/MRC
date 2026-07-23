@@ -38,12 +38,10 @@ plt.rcParams["figure.dpi"] = 300
 plt.rcParams["savefig.dpi"] = 600
 plt.rcParams["font.size"] = 13
 
-
 def save_figure(path_stem):
     plt.savefig(f"{path_stem}.png", dpi=600, bbox_inches="tight")
     plt.savefig(f"{path_stem}.pdf", bbox_inches="tight")
     plt.close()
-
 
 def violin_plot(data_dict, ylabel, title, path_stem):
     fig, ax = plt.subplots(figsize=(8, 6))
@@ -65,7 +63,6 @@ def violin_plot(data_dict, ylabel, title, path_stem):
     ax.grid(axis="y", alpha=0.3)
     plt.tight_layout()
     save_figure(path_stem)
-
 
 summary = []
 

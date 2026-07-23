@@ -36,7 +36,6 @@ plt.rcParams["figure.dpi"] = 300
 plt.rcParams["savefig.dpi"] = 600
 plt.rcParams["font.size"] = 13
 
-
 def season(m):
     if m in [12, 1, 2]:
         return "Winter"
@@ -46,12 +45,10 @@ def season(m):
         return "SW Monsoon"
     return "Post-Monsoon"
 
-
 def save_figure(path_stem):
     plt.savefig(f"{path_stem}.png", dpi=600, bbox_inches="tight")
     plt.savefig(f"{path_stem}.pdf", bbox_inches="tight")
     plt.close()
-
 
 summary = []
 

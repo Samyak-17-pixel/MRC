@@ -27,7 +27,6 @@ import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 from pathlib import Path
 
-
 BASE = Path("/home/samyak/mrc_ws")
 RESULTS = BASE / "outputs"
 OUT = RESULTS / "climate_comparison"
@@ -62,16 +61,13 @@ plt.rcParams.update({
     "axes.labelsize": 12,
 })
 
-
 def save_fig(path_stem):
     plt.savefig(f"{path_stem}.png", dpi=600, bbox_inches="tight")
     plt.savefig(f"{path_stem}.pdf", bbox_inches="tight")
     plt.close()
 
-
 def load_csv(path, index_col=None):
     return pd.read_csv(RESULTS / path, index_col=index_col)
-
 
 def load_frequency_data():
     enso = load_csv("enso/frequency/summary.csv").set_index("Region")
@@ -99,7 +95,6 @@ def load_frequency_data():
             })
     return pd.DataFrame(rows)
 
-
 def load_lag_data():
     rows = []
     lag_curves = {}
@@ -121,7 +116,6 @@ def load_lag_data():
                 "Intensity_p": best_i["Intensity_p"],
             })
     return pd.DataFrame(rows), lag_curves
-
 
 def load_statistics_data():
     from scipy.stats import kruskal
@@ -176,7 +170,6 @@ def load_statistics_data():
 
     return pd.DataFrame(rows), desc
 
-
 def load_annual_data():
     rows = []
     annual_ts = {}
@@ -190,8 +183,7 @@ def load_annual_data():
             annual_ts[(driver, region)] = df
             valid = df[["Events", idx_col]].dropna()
             if len(valid) > 2:
-                r, p = np.corrcoef(valid["Events"], valid[idx_col])[0, 1], \
-                    __import__("scipy.stats", fromlist=["pearsonr"]).pearsonr(
+                r, p = np.corrcoef(valid["Events"], valid[idx_col])[0, 1],                    __import__("scipy.stats", fromlist=["pearsonr"]).pearsonr(
                         valid["Events"], valid[idx_col]
                     )[1]
             else:
@@ -203,7 +195,6 @@ def load_annual_data():
                 "Events_vs_Index_p": p,
             })
     return pd.DataFrame(rows), annual_ts
-
 
 def load_seasonal_data():
     rows = []
@@ -224,7 +215,6 @@ def load_seasonal_data():
             )
     return pd.DataFrame(rows), season_tables
 
-
 def load_strength_data():
     strength = {}
     for driver, prefix in [("ENSO", "enso"), ("IOD", "iod"), ("MEI", "mei")]:
@@ -233,7 +223,6 @@ def load_strength_data():
                 f"{prefix}/strength/csv/{region.lower()}_strength.csv"
             )
     return strength
-
 
 def compute_rankings(freq, lag, stats, annual, seasonal):
     rows = []
@@ -278,7 +267,6 @@ def compute_rankings(freq, lag, stats, annual, seasonal):
     df = pd.DataFrame(rows)
     df["Rank"] = df.groupby("Region")["CompositeScore"].rank(ascending=False).astype(int)
     return df
-
 
 def plot_frequency_figures(freq):
     phase_labels = {
@@ -342,7 +330,6 @@ def plot_frequency_figures(freq):
         fig.suptitle(f"{region}: Phase Distribution by Driver", fontweight="bold")
         fig.tight_layout()
         save_fig(DIRS["frequency"] / f"{region.lower()}_phase_pies")
-
 
 def plot_lag_figures(lag_df, lag_curves):
     for region in REGIONS:
@@ -446,7 +433,6 @@ def plot_lag_figures(lag_df, lag_curves):
     fig.tight_layout()
     save_fig(DIRS["lag"] / "lag_significance_bars")
 
-
 def pivot_heatmap(df, value_col, title, fname, cmap="RdYlBu_r", vmin=None, vmax=None,
                   fmt=".3f", sig_col=None):
     pivot = df.pivot(index="Region", columns="Driver", values=value_col)
@@ -476,7 +462,6 @@ def pivot_heatmap(df, value_col, title, fname, cmap="RdYlBu_r", vmin=None, vmax=
     ax.set_title(title, fontweight="bold")
     plt.tight_layout()
     save_fig(DIRS["heatmaps"] / fname)
-
 
 def plot_heatmaps(freq, lag, stats, annual, seasonal, rankings):
     pivot_heatmap(freq, "PValue", "Frequency Chi-Square p-value\n(* = p < 0.05)",
@@ -536,7 +521,6 @@ def plot_heatmaps(freq, lag, stats, annual, seasonal, rankings):
     plt.tight_layout()
     save_fig(DIRS["heatmaps"] / "master_significance_matrix")
 
-
 def plot_statistics_figures(desc):
     for region in REGIONS:
         fig, axes = plt.subplots(1, 2, figsize=(14, 6))
@@ -573,7 +557,6 @@ def plot_statistics_figures(desc):
     fig.suptitle("Maximum MHW Duration by Phase", fontweight="bold")
     fig.tight_layout()
     save_fig(DIRS["statistics"] / "max_duration_by_phase")
-
 
 def plot_annual_figures(annual_ts):
     for region in REGIONS:
@@ -613,7 +596,6 @@ def plot_annual_figures(annual_ts):
         ax1.grid(alpha=0.3)
         fig.tight_layout()
         save_fig(DIRS["annual"] / f"{region.lower()}_all_indices_overlay")
-
 
 def plot_seasonal_figures(season_tables):
     seasons = ["Winter", "Pre-Monsoon", "SW Monsoon", "Post-Monsoon"]
@@ -655,7 +637,6 @@ def plot_seasonal_figures(season_tables):
         ax.grid(axis="y", alpha=0.3)
         plt.tight_layout()
         save_fig(DIRS["seasonal"] / f"{region.lower()}_season_totals")
-
 
 def plot_strength_figures(strength):
     for region in REGIONS:
@@ -700,7 +681,6 @@ def plot_strength_figures(strength):
     fig.suptitle("Collapsed Strength: Warm vs Neutral vs Cool", fontweight="bold")
     fig.tight_layout()
     save_fig(DIRS["strength"] / "collapsed_strength_comparison")
-
 
 def plot_ranking_figures(rankings):
     for region in REGIONS:
@@ -755,7 +735,6 @@ def plot_ranking_figures(rankings):
     ax.grid(axis="y", alpha=0.3)
     plt.tight_layout()
     save_fig(DIRS["rankings"] / "wind_vs_climate_drivers")
-
 
 def plot_dashboards(freq, lag, rankings, lag_curves):
     wind_pct = {"North": 83.7, "Central": 77.5, "South": 82.1}
@@ -882,7 +861,6 @@ def plot_dashboards(freq, lag, rankings, lag_curves):
     fig.suptitle("Bay of Bengal MHW — Master Climate Driver Comparison", fontweight="bold", fontsize=16)
     save_fig(DIRS["dashboards"] / "master_dashboard")
 
-
 def main():
     print("=" * 80)
     print("CLIMATE DRIVER COMPARISON")
@@ -944,7 +922,6 @@ def main():
     print(f"COMPLETE — {fig_count} figures + {len(list(CSV_DIR.glob('*.csv')))} CSVs")
     print(f"Output: {OUT}")
     print(f"{'=' * 80}")
-
 
 if __name__ == "__main__":
     main()

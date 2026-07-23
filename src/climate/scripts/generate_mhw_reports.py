@@ -4,7 +4,6 @@ from pathlib import Path
 
 RESULTS = "/home/samyak/mrc_ws/outputs"
 
-
 Path(f"{RESULTS}/mhw/annual_statistics").mkdir(exist_ok=True)
 
 Path(f"{RESULTS}/mhw/top_events").mkdir(exist_ok=True)
@@ -32,7 +31,6 @@ regions = [
 
 summary_text = []
 
-
 for region in regions:
 
     print(f"\nProcessing {region}")
@@ -50,7 +48,6 @@ for region in regions:
     )
 
     df["Year"] = df["Start_Date"].dt.year
-
 
     annual = df.groupby("Year").agg({
 
@@ -87,7 +84,6 @@ for region in regions:
         index=False
     )
 
-
     for year in sorted(df["Year"].unique()):
 
         yearly = df[
@@ -102,7 +98,6 @@ for region in regions:
 
             index=False
         )
-
 
     longest = (
 
@@ -123,7 +118,6 @@ for region in regions:
         index=False
     )
 
-
     strongest = (
 
         df.sort_values(
@@ -143,7 +137,6 @@ for region in regions:
         index=False
     )
 
-
     summary_text.append(
         f"\n{region.upper()}\n"
     )
@@ -161,7 +154,6 @@ for region in regions:
         f"Strongest Event: "
         f"{df['Max_Intensity'].max():.3f} C\n"
     )
-
 
     plt.figure(figsize=(10,5))
 
@@ -192,7 +184,6 @@ for region in regions:
 
     plt.close()
 
-
     plt.figure(figsize=(10,5))
 
     plt.plot(
@@ -222,7 +213,6 @@ for region in regions:
 
     plt.close()
 
-
     plt.figure(figsize=(10,5))
 
     plt.plot(
@@ -251,7 +241,6 @@ for region in regions:
     )
 
     plt.close()
-
 
 with open(
 

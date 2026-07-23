@@ -1,12 +1,7 @@
 import xarray as xr
 import matplotlib.pyplot as plt
 
-# =====================================================
-# Load SST Dataset
-# =====================================================
-
-file_path = "/home/samyak/mrc_ws/data/raw/sst.day.mean.2016" \
-".nc"
+file_path = "/home/samyak/mrc_ws/data/raw/sst.day.mean.2016"".nc"
 
 print("Opening dataset...")
 
@@ -14,10 +9,6 @@ ds = xr.open_dataset(file_path)
 
 print("\nDataset Summary:")
 print(ds)
-
-# =====================================================
-# Extract Bay of Bengal
-# =====================================================
 
 print("\nExtracting Bay of Bengal...")
 
@@ -27,10 +18,6 @@ bob = ds.sel(
 )
 
 print(bob)
-
-# =====================================================
-# Plot First SST Map
-# =====================================================
 
 print("\nPlotting SST map for first day...")
 
@@ -43,10 +30,6 @@ plt.title("Bay of Bengal SST - 2025-01-01")
 plt.tight_layout()
 
 plt.show()
-
-# =====================================================
-# Define Regions
-# =====================================================
 
 north = bob.sel(
     lat=slice(15,22),
@@ -63,10 +46,6 @@ south = bob.sel(
     lon=slice(85,95)
 )
 
-# =====================================================
-# Compute Daily Mean SST
-# =====================================================
-
 print("\nComputing regional SST time series...")
 
 north_sst = north.sst.mean(dim=["lat","lon"])
@@ -74,10 +53,6 @@ north_sst = north.sst.mean(dim=["lat","lon"])
 central_sst = central.sst.mean(dim=["lat","lon"])
 
 south_sst = south.sst.mean(dim=["lat","lon"])
-
-# =====================================================
-# Plot Regional SST
-# =====================================================
 
 plt.figure(figsize=(14,6))
 
@@ -98,10 +73,6 @@ plt.grid(True)
 plt.tight_layout()
 
 plt.show()
-
-# =====================================================
-# Print Statistics
-# =====================================================
 
 print("\nNorth BoB")
 print("Mean SST =", float(north_sst.mean()))

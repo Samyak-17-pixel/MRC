@@ -30,7 +30,6 @@ plt.rcParams["font.size"] = 12
 plt.rcParams["axes.labelsize"] = 13
 plt.rcParams["axes.titlesize"] = 15
 
-
 DATA_DIR = "/home/samyak/mrc_ws/data/raw"
 
 OUTPUT_DIR = "/home/samyak/mrc_ws/outputs/spatial_analysis"
@@ -82,7 +81,6 @@ REGIONS = {
 
 }
 
-
 SUBFOLDERS = [
 
     "composites",
@@ -125,7 +123,6 @@ for folder in SUBFOLDERS:
 
     )
 
-
 logging.basicConfig(
 
     filename=os.path.join(
@@ -147,7 +144,6 @@ logging.basicConfig(
 logging.info("=" * 80)
 logging.info("Starting ENSO Spatial Analysis")
 logging.info("=" * 80)
-
 
 def load_sst():
 
@@ -193,7 +189,6 @@ def load_sst():
 
     return ds
 
-
 def inspect_dataset(ds):
 
     print()
@@ -234,7 +229,6 @@ def inspect_dataset(ds):
 
     logging.info("Dataset inspection completed")
 
-
 def preprocess_sst(ds):
 
     """
@@ -255,7 +249,6 @@ def preprocess_sst(ds):
 
     return ds
 
-
 def remove_duplicate_times(ds):
     """
     Remove duplicate timestamps if multiple NetCDF files overlap.
@@ -271,7 +264,6 @@ def remove_duplicate_times(ds):
 
     return ds
 
-
 def fill_missing_values(ds):
     """
     Fill small temporal gaps using linear interpolation.
@@ -285,7 +277,6 @@ def fill_missing_values(ds):
     )
 
     return ds
-
 
 def create_land_mask(ds):
     """
@@ -301,7 +292,6 @@ def create_land_mask(ds):
     )
 
     return mask
-
 
 def compute_daily_climatology(ds):
     """
@@ -329,7 +319,6 @@ def compute_daily_climatology(ds):
     logging.info("Daily climatology saved.")
 
     return climatology
-
 
 def compute_daily_anomalies(ds, climatology):
     """
@@ -367,7 +356,6 @@ def compute_daily_anomalies(ds, climatology):
     logging.info("Daily anomalies saved.")
 
     return anomaly
-
 
 def dataset_statistics(ds):
 
@@ -417,7 +405,6 @@ def dataset_statistics(ds):
 
     return df
 
-
 def load_oni():
 
     logging.info("Loading ONI...")
@@ -427,7 +414,6 @@ def load_oni():
     print(oni)
 
     return oni
-
 
 def quick_sst_plot(ds):
 
@@ -493,7 +479,6 @@ def quick_sst_plot(ds):
 
     plt.close()
 
-
 def quick_anomaly_plot(anomaly):
 
     fig = plt.figure(figsize=(10,8))
@@ -552,7 +537,6 @@ def quick_anomaly_plot(anomaly):
 
     plt.close()
 
-
 def preprocess_pipeline():
 
     ds = load_sst()
@@ -579,9 +563,7 @@ def preprocess_pipeline():
 
     return ds, anomaly, climatology, mask
 
-
 logging.info("Preprocessing module loaded successfully.")
-
 
 def load_mhw_catalogues():
 
@@ -625,7 +607,6 @@ def load_mhw_catalogues():
 
     return catalogues
 
-
 def assign_enso_phase(oni):
 
     """
@@ -649,7 +630,6 @@ def assign_enso_phase(oni):
     ] = "La Nina"
 
     return oni
-
 
 def map_events_to_enso(df, oni):
 
@@ -696,7 +676,6 @@ def map_events_to_enso(df, oni):
 
     return df
 
-
 def extract_event_sst(ds, event_date):
 
     """
@@ -712,7 +691,6 @@ def extract_event_sst(ds, event_date):
     )
 
     return field
-
 
 def build_composites(ds, events):
 
@@ -754,7 +732,6 @@ def build_composites(ds, events):
 
     return composites
 
-
 def average_composites(composites):
 
     """
@@ -781,7 +758,6 @@ def average_composites(composites):
 
     return output
 
-
 def save_composites(composites):
 
     for phase in composites:
@@ -799,7 +775,6 @@ def save_composites(composites):
             )
 
         )
-
 
 def plot_composite(field, title, filename):
 
@@ -869,7 +844,6 @@ def plot_composite(field, title, filename):
 
     plt.close()
 
-
 def generate_composite_maps(composites):
 
     for phase in composites:
@@ -885,7 +859,6 @@ def generate_composite_maps(composites):
         )
 
     logging.info("Composite maps generated.")
-
 
 def build_anomaly_composites(anomaly, events):
 
@@ -934,7 +907,6 @@ def build_anomaly_composites(anomaly, events):
 
     return output
 
-
 def save_anomaly_composites(composites):
 
     for phase in composites:
@@ -952,7 +924,6 @@ def save_anomaly_composites(composites):
             )
 
         )
-
 
 def plot_anomaly(field,
                  title,
@@ -1031,7 +1002,6 @@ def plot_anomaly(field,
 
     plt.close()
 
-
 def generate_anomaly_maps(composites):
 
     for phase in composites:
@@ -1047,7 +1017,6 @@ def generate_anomaly_maps(composites):
         )
 
     logging.info("Anomaly maps completed.")
-
 
 def compute_difference_maps(composites):
 
@@ -1080,7 +1049,6 @@ def compute_difference_maps(composites):
     }
 
     return differences
-
 
 def plot_difference(field,
                     title,
@@ -1159,7 +1127,6 @@ def plot_difference(field,
 
     plt.close()
 
-
 def generate_difference_maps(differences):
 
     for name in differences:
@@ -1189,7 +1156,6 @@ def generate_difference_maps(differences):
         )
 
     logging.info("Difference maps generated.")
-
 
 def compute_density_map(ds,
                         events):
@@ -1230,7 +1196,6 @@ def compute_density_map(ds,
         density += hot.sum("time")
 
     return density
-
 
 def plot_density_map(density):
 
@@ -1315,9 +1280,7 @@ def plot_density_map(density):
 
     plt.close()
 
-
 LEAD_LAG_DAYS = [-30, -15, -7, 0, 7, 15, 30]
-
 
 def extract_lag_field(anomaly, date, lag):
 
@@ -1342,7 +1305,6 @@ def extract_lag_field(anomaly, date, lag):
     except Exception:
 
         return None
-
 
 def build_lead_lag_composites(anomaly, events):
 
@@ -1401,7 +1363,6 @@ def build_lead_lag_composites(anomaly, events):
 
     return output
 
-
 def save_lead_lag(composites):
 
     logging.info("Saving lead-lag NetCDF files...")
@@ -1421,7 +1382,6 @@ def save_lead_lag(composites):
             )
 
         )
-
 
 def plot_lead_lag(field, lag):
 
@@ -1515,7 +1475,6 @@ def plot_lead_lag(field, lag):
 
     plt.close()
 
-
 def generate_lead_lag_maps(composites):
 
     logging.info("Generating lead-lag maps...")
@@ -1531,7 +1490,6 @@ def generate_lead_lag_maps(composites):
         )
 
     logging.info("Lead-lag maps complete.")
-
 
 def create_lead_lag_animation():
 
@@ -1590,7 +1548,6 @@ def create_lead_lag_animation():
     )
 
     logging.info("Lead-lag animation saved.")
-
 
 if __name__ == "__main__":
 

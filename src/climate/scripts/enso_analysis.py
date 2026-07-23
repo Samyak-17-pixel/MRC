@@ -3,7 +3,6 @@ import xarray as xr
 import pandas as pd
 import matplotlib.pyplot as plt
 
-
 DATA = os.path.expanduser("~/mrc_ws/data/raw/oni.nc")
 
 OUT = os.path.expanduser(
@@ -16,7 +15,6 @@ FIG = os.path.join(OUT, "figures")
 os.makedirs(CSV, exist_ok=True)
 os.makedirs(FIG, exist_ok=True)
 
-
 ds = xr.open_dataset(DATA)
 
 df = ds.to_dataframe().reset_index()
@@ -24,7 +22,6 @@ df = ds.to_dataframe().reset_index()
 df = df.rename(columns={"value":"ONI"})
 
 df = df[(df.time.dt.year>=2006)&(df.time.dt.year<=2025)]
-
 
 def phase(v):
 
@@ -39,9 +36,7 @@ def phase(v):
 
 df["Phase"]=df["ONI"].apply(phase)
 
-
 df.to_csv(os.path.join(CSV,"oni_timeseries.csv"),index=False)
-
 
 monthly=df.groupby(df.time.dt.month)["ONI"].mean()
 
@@ -49,20 +44,17 @@ monthly.to_csv(
     os.path.join(CSV,"monthly_climatology.csv")
 )
 
-
 annual=df.groupby(df.time.dt.year)["ONI"].mean()
 
 annual.to_csv(
     os.path.join(CSV,"annual_mean.csv")
 )
 
-
 summary=df["Phase"].value_counts()
 
 summary.to_csv(
     os.path.join(CSV,"phase_counts.csv")
 )
-
 
 plt.figure(figsize=(14,4))
 
@@ -82,7 +74,6 @@ plt.savefig(os.path.join(FIG,"oni_timeseries.png"))
 
 plt.close()
 
-
 plt.figure(figsize=(6,5))
 
 plt.hist(df.ONI,bins=20)
@@ -97,7 +88,6 @@ plt.savefig(os.path.join(FIG,"oni_histogram.png"))
 
 plt.close()
 
-
 plt.figure(figsize=(8,4))
 
 monthly.plot(marker='o')
@@ -111,7 +101,6 @@ plt.tight_layout()
 plt.savefig(os.path.join(FIG,"monthly_climatology.png"))
 
 plt.close()
-
 
 plt.figure(figsize=(12,4))
 

@@ -7,13 +7,11 @@ import numpy as np
 import pandas as pd
 
 ML_ROOT = Path(__file__).resolve().parent
-WS_ROOT = ML_ROOT.parents[1]  # src/ml → repo root
-
+WS_ROOT = ML_ROOT.parents[1]
 
 def load_config():
     with open(ML_ROOT / "config" / "model_config.yaml") as f:
         return yaml.safe_load(f)
-
 
 def cfg_path(key):
     """Resolve configured paths; prefer relative keys, fall back to WS_ROOT/results."""
@@ -29,7 +27,6 @@ def cfg_path(key):
         return Path(paths.get("results", WS_ROOT / "outputs"))
     return Path(paths[key])
 
-
 def season(month):
     if month in [12, 1, 2]:
         return "Winter"
@@ -38,7 +35,6 @@ def season(month):
     if month in [6, 7, 8, 9]:
         return "SW Monsoon"
     return "Post-Monsoon"
-
 
 def load_climate_monthly():
     """Load ONI, DMI, MEI and return daily forward-filled series."""
@@ -61,7 +57,6 @@ def load_climate_monthly():
     )
     climate = climate.sort_values("Date")
     return climate
-
 
 def expand_climate_to_daily(daily_dates, climate_monthly, lag_months):
     """Forward-fill monthly climate to daily and add lag columns."""
@@ -94,7 +89,6 @@ def expand_climate_to_daily(daily_dates, climate_monthly, lag_months):
     merged = merged.drop(columns=["YearMonth"], errors="ignore")
     return merged
 
-
 def detect_event_starts(region):
     """Return set of MHW event start dates from catalogue."""
     cat = pd.read_csv(
@@ -102,7 +96,6 @@ def detect_event_starts(region):
     )
     cat["Start_Date"] = pd.to_datetime(cat["Start_Date"])
     return set(cat["Start_Date"].dt.normalize())
-
 
 def assign_onset_labels(df, horizons, event_starts):
     """Label: will a new MHW event START within next H days?"""
@@ -116,11 +109,9 @@ def assign_onset_labels(df, horizons, event_starts):
         df[col] = labels
     return df
 
-
 def year_split_mask(dates, year_range):
     years = dates.dt.year
     return (years >= year_range[0]) & (years <= year_range[1])
-
 
 def save_json(obj, path):
     path = Path(path)
@@ -128,13 +119,11 @@ def save_json(obj, path):
     with open(path, "w") as f:
         json.dump(obj, f, indent=2, default=str)
 
-
 FEATURE_COLS_EXCLUDE = {
     "Date", "Region", "Year", "Month", "DOY", "Season",
     "in_mhw", "event_start", "event_end",
 }
 LABEL_PREFIX = "onset_"
-
 
 def get_feature_columns(df):
     return [
@@ -144,13 +133,11 @@ def get_feature_columns(df):
         and df[c].dtype in [np.float64, np.float32, np.int64, np.int32, np.bool_]
     ]
 
-
 def load_region_df(region):
     path = ML_ROOT / "datasets" / "processed" / f"{region}_daily_features.csv"
     df = pd.read_csv(path)
     df["Date"] = pd.to_datetime(df["Date"])
     return df
-
 
 def ensure_dirs():
     for sub in [

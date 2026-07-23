@@ -35,7 +35,6 @@ from common import (
 
 ensure_dirs()
 
-
 def logistic_feature_cols(df: pd.DataFrame) -> list[str]:
     """Match training/02_train_baselines.py feature selection for logistic models."""
     return [
@@ -56,7 +55,6 @@ def logistic_feature_cols(df: pd.DataFrame) -> list[str]:
         )
     ][:25]
 
-
 def load_predictor(region: str, horizon: int, model_name: str, df: pd.DataFrame):
     """Return (model, feature_list, path_stem). Handles ML bundles and baseline Pipelines."""
     label = f"onset_{horizon}d"
@@ -75,7 +73,6 @@ def load_predictor(region: str, horizon: int, model_name: str, df: pd.DataFrame)
     bundle = joblib.load(path)
     return bundle["model"], bundle["features"], path.stem
 
-
 def best_model_name(region: str, horizon: int, fallback: str) -> str:
     path = ML_ROOT / "outputs" / "metrics" / "best_models.csv"
     if not path.exists():
@@ -86,13 +83,11 @@ def best_model_name(region: str, horizon: int, fallback: str) -> str:
         return fallback
     return str(hit.iloc[0]["model"])
 
-
 def predict_proba_row(model, feats: list[str], row: pd.Series) -> float:
     X = pd.DataFrame([row[feats].fillna(0).to_dict()], columns=feats)
     if hasattr(model, "predict_proba"):
         return float(model.predict_proba(X)[0, 1])
     return float(model.predict(X)[0])
-
 
 def alert_level(prob: float) -> str:
     if prob >= 0.5:
@@ -100,7 +95,6 @@ def alert_level(prob: float) -> str:
     if prob >= 0.25:
         return "MODERATE"
     return "LOW"
-
 
 def catalogue_starts(year: int) -> pd.DataFrame:
     rows = []
@@ -112,7 +106,6 @@ def catalogue_starts(year: int) -> pd.DataFrame:
         sub.insert(0, "Region", region)
         rows.append(sub)
     return pd.concat(rows, ignore_index=True) if rows else pd.DataFrame()
-
 
 def verify_year(year: int, config: dict, alert_thresh: float = 0.25) -> pd.DataFrame:
     """
@@ -152,7 +145,6 @@ def verify_year(year: int, config: dict, alert_thresh: float = 0.25) -> pd.DataF
                 }
             )
     return pd.DataFrame(records)
-
 
 def main():
     config = load_config()
@@ -244,7 +236,6 @@ def main():
     print("\n" + "=" * 72)
     print(f"  Saved forecast: {out / 'latest_forecast.csv'}")
     print("=" * 72)
-
 
 if __name__ == "__main__":
     main()

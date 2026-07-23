@@ -16,7 +16,6 @@ STAGES = [
     ("iod_strength_analysis.py", "IOD strength classification"),
 ]
 
-
 def run_stage(script_name, description):
     script = SCRIPTS_DIR / script_name
     print(f"\n{'=' * 80}")
@@ -34,7 +33,6 @@ def run_stage(script_name, description):
         sys.exit(result.returncode)
 
     print(f"\n{script_name} completed successfully.")
-
 
 if __name__ == "__main__":
     print("=" * 80)

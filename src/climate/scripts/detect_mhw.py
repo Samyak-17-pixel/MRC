@@ -15,7 +15,6 @@ for region in regions:
 
     print(f"\nProcessing {region}")
 
-
     sst = pd.read_csv(
         f"{RESULTS}/timeseries/{region}_bob_sst.csv"
     )
@@ -28,18 +27,15 @@ for region in regions:
 
     sst = sst[sst["DOY"] != 366]
 
-
     threshold = pd.read_csv(
     f"{RESULTS}/mhw/climatology/{region}_hobday.csv"
     )[["DOY","Threshold90"]]
-
 
     df = pd.merge(
         sst,
         threshold,
         on="DOY"
     )
-
 
     df["Intensity"] = (
         df["SST"] -
@@ -49,7 +45,6 @@ for region in regions:
     df["Hot"] = (
         df["Intensity"] > 0
     )
-
 
     events = []
 
@@ -99,7 +94,6 @@ for region in regions:
                 })
 
             in_event = False
-
 
     events_df = pd.DataFrame(events)
 

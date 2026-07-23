@@ -21,7 +21,6 @@ import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 
-
 DATASET_DIR = "/home/samyak/mrc_ws/data/raw"
 
 DATASETS = [
@@ -43,7 +42,6 @@ OUTPUT_DIR = "/home/samyak/mrc_ws/outputs/maps/sst"
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-
 if len(sys.argv) != 2:
 
     print("\nUsage:")
@@ -51,7 +49,6 @@ if len(sys.argv) != 2:
     sys.exit()
 
 PLOT_DATE = sys.argv[1]
-
 
 dataset_file = None
 
@@ -70,16 +67,13 @@ print("\nDataset Selected")
 print("------------------------------")
 print(dataset_file)
 
-
 print("\nLoading dataset...")
 
 ds = xr.open_dataset(dataset_file)
 
-
 lat = "latitude"
 lon = "longitude"
 sst = "thetao"
-
 
 try:
 
@@ -89,7 +83,6 @@ except Exception:
 
     print(f"\nDate {PLOT_DATE} not found.")
     sys.exit()
-
 
 minimum = float(data.min())
 
@@ -102,7 +95,6 @@ print("------------------------------")
 print(f"Minimum SST : {minimum:.2f} °C")
 print(f"Maximum SST : {maximum:.2f} °C")
 print(f"Mean SST    : {mean:.2f} °C")
-
 
 fig = plt.figure(figsize=(10,8))
 

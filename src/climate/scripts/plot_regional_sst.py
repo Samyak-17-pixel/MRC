@@ -15,7 +15,6 @@ south["Date"] = pd.to_datetime(south["Date"])
 fig_dir = Path(f"{RESULTS}/mhw/figures")
 fig_dir.mkdir(exist_ok=True)
 
-
 plt.figure(figsize=(14,5))
 plt.plot(north["Date"], north["SST"])
 plt.title("North Bay of Bengal SST (2006–2025)")
@@ -24,7 +23,6 @@ plt.grid(True)
 plt.tight_layout()
 plt.savefig(fig_dir / "north_bob_sst.png", dpi=300)
 plt.close()
-
 
 plt.figure(figsize=(14,5))
 plt.plot(central["Date"], central["SST"])
@@ -35,7 +33,6 @@ plt.tight_layout()
 plt.savefig(fig_dir / "central_bob_sst.png", dpi=300)
 plt.close()
 
-
 plt.figure(figsize=(14,5))
 plt.plot(south["Date"], south["SST"])
 plt.title("South Bay of Bengal SST (2006–2025)")
@@ -44,7 +41,6 @@ plt.grid(True)
 plt.tight_layout()
 plt.savefig(fig_dir / "south_bob_sst.png", dpi=300)
 plt.close()
-
 
 plt.figure(figsize=(16,6))
 

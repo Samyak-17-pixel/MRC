@@ -6,22 +6,18 @@ so rearranging folders does not change scientific logic — only locations.
 """
 from pathlib import Path
 
-# src/paths.py → repo root is parent of src/
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 DATA_RAW = REPO_ROOT / "data" / "raw"
 OUTPUTS = REPO_ROOT / "outputs"
 ARCHIVE = REPO_ROOT / "archive"
 
-# Climate package roots
 CLIMATE_ROOT = REPO_ROOT / "src" / "climate"
 SCRIPTS = CLIMATE_ROOT / "scripts"
 PLOTTING = CLIMATE_ROOT / "plotting"
 
-# ML package root
 ML_ROOT = REPO_ROOT / "src" / "ml"
 
-# Convenience output subtrees (R3 layout)
 TIMESERIES = OUTPUTS / "timeseries"
 MHW = OUTPUTS / "mhw"
 MHW_CATALOGUE = MHW / "catalogue"

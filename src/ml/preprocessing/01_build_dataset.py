@@ -18,7 +18,6 @@ from common import (
 
 ensure_dirs()
 
-
 def build_region_dataset(region, config):
     res = cfg_path("results")
     windows = config["features"]["rolling_windows"]
@@ -103,7 +102,6 @@ def build_region_dataset(region, config):
     df = df.dropna(subset=["SST", "Wind"]).reset_index(drop=True)
     return df
 
-
 def main():
     config = load_config()
     regions = config["regions"]
@@ -136,7 +134,6 @@ def main():
     print("DATASET BUILD COMPLETE")
     print(f"  Output: {ML_ROOT / 'datasets' / 'processed'}")
     print("=" * 72)
-
 
 if __name__ == "__main__":
     main()

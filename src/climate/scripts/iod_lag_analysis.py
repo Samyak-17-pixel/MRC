@@ -35,7 +35,6 @@ plt.rcParams["figure.dpi"] = 300
 plt.rcParams["savefig.dpi"] = 600
 plt.rcParams["font.size"] = 13
 
-
 def classify_iod(dmi):
     if pd.isna(dmi):
         return "Unknown"
@@ -44,7 +43,6 @@ def classify_iod(dmi):
     if dmi <= -0.4:
         return "Negative"
     return "Neutral"
-
 
 def load_dmi():
     ds = xr.open_dataset(DMI_FILE)
@@ -55,18 +53,15 @@ def load_dmi():
     df = df[(df["time"].dt.year >= 2006) & (df["time"].dt.year <= 2025)]
     return df[["time", "DMI"]]
 
-
 def get_dmi(dt, lag, dmi_df):
     t = (pd.Timestamp(dt) - pd.DateOffset(months=lag)).replace(day=1)
     row = dmi_df.loc[dmi_df["time"] == t]
     return np.nan if len(row) == 0 else float(row["DMI"].iloc[0])
 
-
 def save_figure(path_stem):
     plt.savefig(f"{path_stem}.png", dpi=600, bbox_inches="tight")
     plt.savefig(f"{path_stem}.pdf", bbox_inches="tight")
     plt.close()
-
 
 dmi = load_dmi()
 summary = []

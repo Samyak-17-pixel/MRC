@@ -8,12 +8,10 @@ print("Opening wind dataset...")
 
 ds = xr.open_dataset(file)
 
-
 wind_speed = np.sqrt(
     ds["u10"]**2 +
     ds["v10"]**2
 )
-
 
 north = wind_speed.sel(
     latitude=slice(25,15),
@@ -30,7 +28,6 @@ south = wind_speed.sel(
     longitude=slice(80,100)
 )
 
-
 north_ts = north.mean(
     dim=["latitude","longitude"]
 )
@@ -42,7 +39,6 @@ central_ts = central.mean(
 south_ts = south.mean(
     dim=["latitude","longitude"]
 )
-
 
 pd.DataFrame({
 

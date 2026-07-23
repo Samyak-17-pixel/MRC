@@ -32,7 +32,6 @@ for region in regions:
         .dt.dayofyear
     )
 
-
     df = df[
         df["DOY"] != 366
     ]
@@ -83,7 +82,6 @@ for region in regions:
         "Threshold90":
         threshold
     })
-
 
     clim_df["Climatology"] = (
 

@@ -21,7 +21,6 @@ from common import ML_ROOT, load_config, year_split_mask, ensure_dirs, load_regi
 
 ensure_dirs()
 
-
 def metrics(y_true, y_prob, threshold=0.5):
     y_pred = (y_prob >= threshold).astype(int)
     return {
@@ -35,7 +34,6 @@ def metrics(y_true, y_prob, threshold=0.5):
         "positives": int(y_true.sum()),
         "n": int(len(y_true)),
     }
-
 
 def main():
     config = load_config()
@@ -130,7 +128,6 @@ def main():
     print("EVALUATION COMPLETE")
     print(f"  Metrics: {ML_ROOT / 'outputs/metrics/all_models_comparison.csv'}")
     print("=" * 72)
-
 
 if __name__ == "__main__":
     main()

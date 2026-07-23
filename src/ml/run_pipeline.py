@@ -18,7 +18,6 @@ STEPS = [
     ML_ROOT / "experiments" / "06_predict_current.py",
 ]
 
-
 def main():
     LOG.parent.mkdir(parents=True, exist_ok=True)
     python = sys.executable
@@ -55,7 +54,6 @@ def main():
     print("PIPELINE COMPLETE")
     print(f"  Log: {LOG}")
     print("=" * 72)
-
 
 if __name__ == "__main__":
     main()

@@ -132,7 +132,6 @@ for region in regions:
                 meanduring - mean7
         })
 
-
         plot_data = wind[
             (wind["Date"] >= start - pd.Timedelta(days=30))
             &

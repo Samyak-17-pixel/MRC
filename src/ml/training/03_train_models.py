@@ -23,7 +23,6 @@ except ImportError:
 
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 
-
 def make_model(name, config, pos_weight):
     if name == "xgboost" and HAS_XGB:
         p = config["models"]["xgboost"]
@@ -53,7 +52,6 @@ def make_model(name, config, pos_weight):
             n_estimators=200, max_depth=4, learning_rate=0.05, random_state=42,
         )
     raise ValueError(name)
-
 
 def main():
     config = load_config()
@@ -101,7 +99,6 @@ def main():
     print("\n" + "=" * 72)
     print("MODEL TRAINING COMPLETE")
     print("=" * 72)
-
 
 if __name__ == "__main__":
     main()

@@ -10,7 +10,6 @@ for region in ["north", "central", "south"]:
 
     total = len(df)
 
-
     reduced_latent = (
         df["SLHF_Anomaly"] > 0
     ).sum()
@@ -26,7 +25,6 @@ for region in ["north", "central", "south"]:
     enhanced_latent_pct = (
         enhanced_latent / total * 100
     )
-
 
     reduced_sensible = (
         df["SSHF_Anomaly"] > 0

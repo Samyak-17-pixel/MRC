@@ -1,14 +1,5 @@
 #!/usr/bin/env python3
-# ==============================================================================
-#
-# ENSO FIGURES
-#
-# Publication-quality figures for
-# Marine Heatwave ENSO Analysis
-#
-# Author : Samyak Kumar
-#
-# ==============================================================================
+
 
 import os
 import warnings
@@ -25,11 +16,6 @@ from matplotlib.patches import Patch
 from scipy.stats import linregress
 
 warnings.filterwarnings("ignore")
-
-
-# ==============================================================================
-# MAIN CLASS
-# ==============================================================================
 
 class ENSOFigureGenerator:
 
@@ -65,8 +51,6 @@ class ENSOFigureGenerator:
         print("="*80)
         print("Marine Heatwave ENSO Figure Generator")
         print("="*80)
-
-    # =====================================================================
 
     def make_directories(self):
 
@@ -105,8 +89,6 @@ class ENSOFigureGenerator:
                 exist_ok=True
 
             )
-
-    # =====================================================================
 
     def set_style(self):
 
@@ -162,8 +144,6 @@ class ENSOFigureGenerator:
 
         }
 
-    # =====================================================================
-
     def save(self,
 
              folder,
@@ -218,8 +198,6 @@ class ENSOFigureGenerator:
 
         print(f"Saved {filename}")
 
-    # =====================================================================
-
     def load_csv(self,
 
                  relative_path):
@@ -240,8 +218,6 @@ class ENSOFigureGenerator:
 
         return pd.read_csv(file)
 
-    # =====================================================================
-
     def publication_title(self,
 
                           title):
@@ -257,8 +233,6 @@ class ENSOFigureGenerator:
             pad=15
 
         )
-
-    # =====================================================================
 
     def beautify_axis(self,
 
@@ -282,8 +256,6 @@ class ENSOFigureGenerator:
 
         )
 
-    # =====================================================================
-
     def add_bar_labels(self,
 
                        ax):
@@ -297,10 +269,6 @@ class ENSOFigureGenerator:
                 fontsize=10
 
             )
-
-    # =====================================================================
-    # LOAD ENSO FREQUENCY DATA
-    # =====================================================================
 
     def load_frequency_data(self):
 
@@ -317,12 +285,6 @@ class ENSOFigureGenerator:
         )
 
         return north, central, south
-
-
-    # =====================================================================
-    # FIGURE 1
-    # GROUPED BAR CHART
-    # =====================================================================
 
     def figure1_grouped_frequency(self):
 
@@ -380,12 +342,6 @@ class ENSOFigureGenerator:
             "frequency",
             "Figure1_Grouped_Frequency"
         )
-
-
-    # =====================================================================
-    # FIGURE 2
-    # STACKED BAR CHART
-    # =====================================================================
 
     def figure2_stacked_frequency(self):
 
@@ -460,12 +416,6 @@ class ENSOFigureGenerator:
             "Figure2_Stacked_Frequency"
 
         )
-
-
-    # =====================================================================
-    # FIGURE 3
-    # PERCENTAGE BAR CHART
-    # =====================================================================
 
     def figure3_percentage_frequency(self):
 
@@ -550,12 +500,6 @@ class ENSOFigureGenerator:
             "Figure3_Percentage"
 
         )
-
-
-    # =====================================================================
-    # FIGURE 4
-    # PIE CHARTS
-    # =====================================================================
 
     def figure4_piecharts(self):
 
@@ -647,11 +591,6 @@ class ENSOFigureGenerator:
 
         plt.close()
 
-
-    # =====================================================================
-    # GENERATE ALL FREQUENCY FIGURES
-    # =====================================================================
-
     def generate_frequency_figures(self):
 
         print("\nGenerating Frequency Figures...")
@@ -665,5 +604,3 @@ class ENSOFigureGenerator:
         self.figure4_piecharts()
 
         print("Frequency figures completed.")
-
-        

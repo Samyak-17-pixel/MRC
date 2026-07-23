@@ -153,7 +153,6 @@ for region in regions:
         index=False
     )
 
-
     plt.figure(
         figsize=(14,5)
     )
@@ -187,7 +186,6 @@ for region in regions:
     )
 
     plt.close()
-
 
     plt.figure(
         figsize=(14,5)

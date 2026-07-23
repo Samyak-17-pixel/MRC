@@ -25,7 +25,6 @@ from common import (
 
 ensure_dirs()
 
-
 def evaluate(y_true, y_prob, y_pred):
     return {
         "accuracy": float(accuracy_score(y_true, y_pred)),
@@ -37,7 +36,6 @@ def evaluate(y_true, y_prob, y_pred):
         "brier_score": float(brier_score_loss(y_true, y_prob)),
     }
 
-
 def climatology_baseline(df, label_col):
     """P(onset) by DOY — empirical seasonal probability."""
     train = df[year_split_mask(df["Date"], load_config()["splits"]["train_years"])]
@@ -46,14 +44,12 @@ def climatology_baseline(df, label_col):
     pred = (prob >= 0.5).astype(int)
     return prob.values, pred.values
 
-
 def persistence_baseline(df, label_col):
     """If currently above threshold with streak >= 3, predict onset likely."""
     prob = np.clip(df["Consecutive_Hot_Days"] / 10, 0, 0.9)
     prob = np.clip(prob + np.clip(df["Intensity"] / 2, 0, 0.3), 0, 1)
     pred = (prob >= 0.5).astype(int)
     return prob, pred
-
 
 def main():
     config = load_config()
@@ -118,7 +114,6 @@ def main():
     print("BASELINES COMPLETE")
     print(f"  Metrics: {ML_ROOT / 'outputs/metrics/baselines.csv'}")
     print("=" * 72)
-
 
 if __name__ == "__main__":
     main()

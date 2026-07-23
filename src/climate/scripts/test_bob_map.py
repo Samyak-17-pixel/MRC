@@ -3,16 +3,13 @@ import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 
-
 FILE = "/home/samyak/mrc_ws/data/raw/copernicus_daily_sst_1Jan2021_31Dec2025.nc"
-
 
 print("Loading dataset...")
 
 ds = xr.open_dataset(FILE)
 
 print(ds)
-
 
 lat_name = "latitude"
 lon_name = "longitude"
@@ -32,7 +29,6 @@ print("Latitude :", lat_name)
 print("Longitude:", lon_name)
 print("SST:", sst_name)
 
-
 sst = ds[sst_name].isel(
     time=0,
     depth=0
@@ -41,7 +37,6 @@ sst = ds[sst_name].isel(
 plot_date = str(ds.time.values[0])[:10]
 
 print(f"Plotting SST for {plot_date}")
-
 
 fig = plt.figure(figsize=(10,8))
 

@@ -11,13 +11,11 @@ import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 
-
 LON_MIN = 79
 LON_MAX = 100
 
 LAT_MIN = 4
 LAT_MAX = 25
-
 
 def create_base_map(figsize=(8, 9)):
 
@@ -33,13 +31,11 @@ def create_base_map(figsize=(8, 9)):
         ccrs.PlateCarree()
     )
 
-
     ax.add_feature(
         cfeature.OCEAN,
         facecolor="#cfe8ff",
         zorder=0
     )
-
 
     ax.add_feature(
         cfeature.LAND,
@@ -49,25 +45,21 @@ def create_base_map(figsize=(8, 9)):
         zorder=1
     )
 
-
     ax.coastlines(
         resolution="10m",
         linewidth=0.8
     )
-
 
     ax.add_feature(
         cfeature.BORDERS,
         linewidth=0.5
     )
 
-
     ax.add_feature(
         cfeature.RIVERS,
         linewidth=0.25,
         alpha=0.4
     )
-
 
     gl = ax.gridlines(
         draw_labels=True,
@@ -89,9 +81,7 @@ def create_base_map(figsize=(8, 9)):
 
     return fig, ax
 
-
 def draw_regions(ax):
-
 
     ax.plot(
         [80,100],
@@ -108,7 +98,6 @@ def draw_regions(ax):
         color="red",
         linewidth=2
     )
-
 
     ax.text(
         90,
@@ -140,7 +129,6 @@ def draw_regions(ax):
         transform=ccrs.PlateCarree()
     )
 
-
 def draw_country_labels(ax):
 
     countries = {
@@ -166,7 +154,6 @@ def draw_country_labels(ax):
             transform=ccrs.PlateCarree()
         )
 
-
 def add_north_arrow(ax):
 
     ax.annotate(
@@ -183,7 +170,6 @@ def add_north_arrow(ax):
         fontsize=12,
         fontweight="bold"
     )
-
 
 def plot_base_map():
 
@@ -202,7 +188,6 @@ def plot_base_map():
     )
 
     return fig, ax
-
 
 if __name__ == "__main__":
 

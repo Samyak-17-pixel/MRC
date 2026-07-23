@@ -3,7 +3,6 @@ import xarray as xr
 import pandas as pd
 import matplotlib.pyplot as plt
 
-
 DATA = os.path.expanduser(
     "~/mrc_ws/data/raw/meiv2.nc"
 )
@@ -18,19 +17,16 @@ FIG = os.path.join(OUT, "figures")
 os.makedirs(CSV, exist_ok=True)
 os.makedirs(FIG, exist_ok=True)
 
-
 ds = xr.open_dataset(DATA)
 
 df = ds.to_dataframe().reset_index()
 
 df = df.rename(columns={"value": "MEI"})
 
-
 df = df[
     (df.time.dt.year >= 2006) &
     (df.time.dt.year <= 2025)
 ]
-
 
 df.to_csv(
     os.path.join(
@@ -39,7 +35,6 @@ df.to_csv(
     ),
     index=False
 )
-
 
 monthly = (
     df.groupby(df.time.dt.month)["MEI"]
@@ -53,7 +48,6 @@ monthly.to_csv(
     )
 )
 
-
 annual = (
     df.groupby(df.time.dt.year)["MEI"]
       .mean()
@@ -65,7 +59,6 @@ annual.to_csv(
         "annual_mean.csv"
     )
 )
-
 
 summary = pd.DataFrame({
 
@@ -113,7 +106,6 @@ summary.to_csv(
 
 )
 
-
 plt.figure(figsize=(15,5))
 
 plt.plot(
@@ -160,7 +152,6 @@ plt.savefig(
 
 plt.close()
 
-
 plt.figure(figsize=(7,5))
 
 plt.hist(
@@ -200,7 +191,6 @@ plt.savefig(
 )
 
 plt.close()
-
 
 plt.figure(figsize=(8,4))
 
@@ -246,7 +236,6 @@ plt.savefig(
 
 plt.close()
 
-
 plt.figure(figsize=(12,4))
 
 plt.plot(
@@ -288,7 +277,6 @@ plt.savefig(
 )
 
 plt.close()
-
 
 df["RunningMean"] = df["MEI"].rolling(
     12,
@@ -349,7 +337,6 @@ plt.savefig(
 
 plt.close()
 
-
 yearly = df.groupby(df.time.dt.year).agg({
 
     "MEI":["mean","max","min","std"]
@@ -380,7 +367,6 @@ yearly.to_csv(
 
 )
 
-
 monthly_table = df.groupby(df.time.dt.month).agg({
 
     "MEI":["mean","max","min","std"]
@@ -410,7 +396,6 @@ monthly_table.to_csv(
     )
 
 )
-
 
 print("\n===================================")
 print("MEI ANALYSIS")

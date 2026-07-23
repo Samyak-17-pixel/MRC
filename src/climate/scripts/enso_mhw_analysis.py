@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 
 from pathlib import Path
 
-
 BASE = Path.home() / "mrc_ws"
 
 RESULTS = BASE / "outputs"
@@ -45,7 +44,6 @@ for folder in [
 
     folder.mkdir(parents=True, exist_ok=True)
 
-
 ONI_FILE = DATASETS / "oni.nc"
 
 NORTH_FILE = RESULTS / "mhw" / "catalogue" / "north_mhw_catalogue.csv"
@@ -70,7 +68,6 @@ oni = oni[
 ]
 
 print("Loaded",len(oni),"months")
-
 
 north = pd.read_csv(NORTH_FILE)
 
@@ -106,7 +103,6 @@ print("Central Events :",len(central))
 
 print("South Events :",len(south))
 
-
 def classify_enso(v):
 
     if pd.isna(v):
@@ -125,7 +121,6 @@ def classify_enso(v):
 
         return "Neutral"
 
-
 def mean_oni(start,end):
 
     months = oni[
@@ -139,7 +134,6 @@ def mean_oni(start,end):
 
     return months.ONI.mean()
 
-
 def before_mean(start,days):
 
     s = start-pd.Timedelta(days=days)
@@ -147,7 +141,6 @@ def before_mean(start,days):
     e = start-pd.Timedelta(days=1)
 
     return mean_oni(s,e)
-
 
 def analyse_region(df):
 
@@ -199,7 +192,6 @@ def analyse_region(df):
 
     return pd.DataFrame(output)
 
-
 print()
 
 print("Analysing North...")
@@ -213,7 +205,6 @@ central_out = analyse_region(central)
 print("Analysing South...")
 
 south_out = analyse_region(south)
-
 
 north_out.to_csv(
 
@@ -246,7 +237,6 @@ print("CSV files saved.")
 print()
 
 print(north_out.head())
-
 
 def phase_statistics(df):
 
@@ -306,7 +296,6 @@ def phase_statistics(df):
 
     return pd.DataFrame(rows)
 
-
 north_summary = phase_statistics(north_out)
 
 central_summary = phase_statistics(central_out)
@@ -337,7 +326,6 @@ south_summary.to_csv(
 
 )
 
-
 def print_summary(region, summary):
 
     print()
@@ -355,7 +343,6 @@ print_summary("North", north_summary)
 print_summary("Central", central_summary)
 
 print_summary("South", south_summary)
-
 
 def strongest_events(df):
 
@@ -425,7 +412,6 @@ longest_events(south_out).to_csv(
 
 )
 
-
 def correlations(df):
 
     print()
@@ -460,9 +446,7 @@ print("SOUTH")
 
 correlations(south_out)
 
-
 def phase_plots(summary, region):
-
 
     plt.figure(figsize=(7,5))
 
@@ -488,7 +472,6 @@ def phase_plots(summary, region):
 
     plt.close()
 
-
     plt.figure(figsize=(6,6))
 
     plt.pie(
@@ -513,9 +496,7 @@ phase_plots(north_summary,"North")
 phase_plots(central_summary,"Central")
 phase_plots(south_summary,"South")
 
-
 def boxplots(df,region):
-
 
     plt.figure(figsize=(7,5))
 
@@ -546,7 +527,6 @@ def boxplots(df,region):
     )
 
     plt.close()
-
 
     plt.figure(figsize=(7,5))
 
@@ -584,9 +564,7 @@ boxplots(central_out,"Central")
 
 boxplots(south_out,"South")
 
-
 def scatterplots(df,region):
-
 
     plt.figure(figsize=(7,5))
 
@@ -623,7 +601,6 @@ def scatterplots(df,region):
     )
 
     plt.close()
-
 
     plt.figure(figsize=(7,5))
 
@@ -666,7 +643,6 @@ scatterplots(north_out,"North")
 scatterplots(central_out,"Central")
 
 scatterplots(south_out,"South")
-
 
 def histograms(df,region):
 
@@ -713,7 +689,6 @@ histograms(north_out,"North")
 histograms(central_out,"Central")
 
 histograms(south_out,"South")
-
 
 def annual_occurrence(df, region):
 
@@ -766,7 +741,6 @@ annual_occurrence(north_out,"North")
 annual_occurrence(central_out,"Central")
 
 annual_occurrence(south_out,"South")
-
 
 def monthly_occurrence(df,region):
 
@@ -830,7 +804,6 @@ monthly_occurrence(central_out,"Central")
 
 monthly_occurrence(south_out,"South")
 
-
 comparison=pd.DataFrame({
 
 "North":north_summary["Events"],
@@ -880,7 +853,6 @@ dpi=300
 )
 
 plt.close()
-
 
 plt.figure(figsize=(16,5))
 
@@ -982,7 +954,6 @@ dpi=300
 
 plt.close()
 
-
 heat=comparison.copy()
 
 plt.figure(figsize=(6,3))
@@ -1035,7 +1006,6 @@ dpi=300
 
 plt.close()
 
-
 summary_compare=pd.DataFrame({
 
 "North":north_summary["Mean Intensity"],
@@ -1079,5 +1049,3 @@ dpi=300
 )
 
 plt.close()
-
-
