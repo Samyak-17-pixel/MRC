@@ -6,7 +6,6 @@
 |---|---|
 | **Author** | Samyak Kumar |
 | **Institution** | Maritime Research Center (MRC) |
-| **Repository** | [github.com/Samyak-17-pixel/MRC](https://github.com/Samyak-17-pixel/MRC) |
 | **Study period** | 2006–2025 (20 years, daily) |
 | **Study region** | Bay of Bengal — North / Central / South |
 | **Status** | Climate-driver analysis complete · ML forecasting v1 complete · Multivariate analysis and fisheries impact pending |
@@ -24,7 +23,6 @@ This README is the master project document: how to use the repo, headline findin
 4. [Complete results](#part-b--complete-results)
 5. [Machine learning module](#part-c--machine-learning-module)
 6. [Folder guides](#folder-guides)
-7. [How to cite](#how-to-cite)
 
 ---
 
@@ -1493,14 +1491,3 @@ Do **not** change Hobday labels or climate methodology from this module.
 
 Every subdirectory also has a local `README.md` with purpose, contents, and regenerate commands.
 
----
-
-## How to cite
-
-Author: Samyak Kumar, Maritime Research Center (MRC).
-
-> Hobday, A. J., et al. (2016). A hierarchical approach to defining marine heatwaves. *Progress in Oceanography*, 141, 227–238.
-
----
-
-*End of master README — Bay of Bengal MHW Project*
